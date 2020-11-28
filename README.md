@@ -38,22 +38,14 @@ public PlayerCard getNextCard() {
 
 <p>
     <br>
-    Maybe I'll make it less complex to override so you don't need to call 
-
-```java protected final void setLastMove(PlayerCard lastMove)```
-    
-    and
-    
-```java protected final void remove(final PlayerCard c) throws IllegalMoveException```
-
-    on your own.
+    Maybe I'll make it less complex to override so you don't need to call  <code>javaprotected final void setLastMove(PlayerCard lastMove)</code> and <code>java protected final void remove(final PlayerCard c) throws IllegalMoveException</code> on your own.
 </p>
-<br>
+
 <p>
     <h3>Rules<h3>
     For rules click <a href = "https://de.wikipedia.org/wiki/Hol%E2%80%99s_der_Geier" ><b>here</b></a>!
 </p>
-<br>
+        
 <p>
     <h4>Upcoming changes:</h4>
     <ul>
