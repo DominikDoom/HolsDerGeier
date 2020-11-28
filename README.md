@@ -7,7 +7,7 @@
     <h4>How to create your own Bot</h4>
     You just need to extends the Player Class and Override the abstract method
     <br>
-    ```java<b>public abstract PlayerCard getNextCard();</b>```
+    ```javascript<b>public abstract PlayerCard getNextCard();</b>```
     <h5>Example (from Localplayer):</h5>
     ```java   @Override
                    public PlayerCard getNextCard() {
