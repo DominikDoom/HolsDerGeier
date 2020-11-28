@@ -12,7 +12,7 @@
 <p>
     <h5>Example (from Localplayer):</h5>
 </p>
-```java
+```
             @Override
                    public PlayerCard getNextCard() {
                        try {
