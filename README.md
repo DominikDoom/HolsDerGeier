@@ -55,6 +55,7 @@ public PlayerCard getNextCard() {
         <li>Database setup to save stats</li>
         <li>Online game vs. other players in realtime</li>
         <li>Make Bot-adding process less laborious</li>
+        <li>Use a Logger instead of System.out</li>
     </ul>
 </p>
 <br>
