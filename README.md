@@ -38,7 +38,7 @@ public PlayerCard getNextCard() {
 
 <p>
     <br>
-    Maybe I'll make it less complex to override so you don't need to call  <code>javaprotected final void setLastMove(PlayerCard lastMove)</code> and <code>java protected final void remove(final PlayerCard c) throws IllegalMoveException</code> on your own.
+    Maybe I'll make it less complex to get a Bot work so you don't need to override <code>protected final void setLastMove(PlayerCard lastMove)</code> and <code>protected final void remove(final PlayerCard c) throws IllegalMoveException</code> each time on your own.
 </p>
 
 <p>
