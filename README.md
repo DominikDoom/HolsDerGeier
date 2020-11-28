@@ -8,11 +8,11 @@
     You just need to extends the Player Class and Override the abstract method
     <br>
 </p>
-    ```java public abstract PlayerCard getNextCard();```
+    <code>java public abstract PlayerCard getNextCard();</code>
 <p>
     <h5>Example (from Localplayer):</h5>
 </p>
-    ```java   @Override
+    <code>java   @Override
                    public PlayerCard getNextCard() {
                        try {
                            System.out.print("Your Cards left to play: ");
@@ -26,11 +26,11 @@
                            System.out.println(e.getMessage());
                        }
                        return null;
-                   } ```
+                   }</code>
 <p>
     <br>
-    Maybe I'll make it less complex to override so you don't need to call ```java protected final void setLastMove(PlayerCard lastMove)``` and
-    ```java protected final void remove(final PlayerCard c) throws IllegalMoveException ``` on your own.
+    Maybe I'll make it less complex to override so you don't need to call <code>java protected final void setLastMove(PlayerCard lastMove)</code> and
+    <code>java protected final void remove(final PlayerCard c) throws IllegalMoveException</code> on your own.
 </p>
 <br>
 <br>
