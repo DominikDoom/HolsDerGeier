@@ -40,7 +40,7 @@
 <br>
     <b>rabitem</b>
     
-```
+```java
 @Override
 public PlayerCard getNextCard() {
     try {
@@ -48,9 +48,9 @@ public PlayerCard getNextCard() {
         this.cards.forEach(k -> System.out.print(k.getValue() + " "));
         System.out.print("\nYour card: ");
         final PlayerCard pC =  new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()));
-        setLastMove(pC);
-        remove(pC);
-        return pC;
+        setLastMove(pC); // sets it to the lastMove
+        remove(pC); // remove card from playableCards
+        return pC; // return the PlayerCard
     }catch (IOException | IllegalMoveException e) {
         System.out.println(e.getMessage());
     }
