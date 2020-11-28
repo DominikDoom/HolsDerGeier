@@ -4,7 +4,7 @@
 </p>
 
 <p>
-    <h4>How to create your own Bot</h4>
+    <h3>How to create your own Bot</h3>
     You just need to extends the Player Class and Override the abstract method
     <br>
 </p>
@@ -42,7 +42,7 @@ public PlayerCard getNextCard() {
 </p>
 
 <p>
-    <h3>Rules<h3>
+    <h3>Rules</h3>
     For rules click <a href = "https://de.wikipedia.org/wiki/Hol%E2%80%99s_der_Geier" ><b>here</b></a>!
 </p>
         
