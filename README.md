@@ -54,7 +54,7 @@ public PlayerCard getNextCard() {
         <li>Better Exception handling (coding my own handler)</li>
         <li>Database setup to save stats</li>
         <li>Online game vs. other players in realtime</li>
-        <li>Make Botadding process less laborious</li>
+        <li>Make Bot-adding process less laborious</li>
     </ul>
 </p>
 <br>
