@@ -18,13 +18,13 @@
 public PlayerCard getNextCard() {
     try {
         System.out.print("Your Cards left to play: ");
-        this.cards.forEach(k -> System.out.print(k.getValue() + " "));
-        System.out.print("\nYour card: ");
+        this.cards.forEach(k -> System.out.print(k.getValue() + " "));      // get available cards and print it for the user
+        System.out.print("\nYour card: ");                                  // formating reasons
         final PlayerCard pC =  new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()));
-        setLastMove(pC); // sets it to the lastMove
-        remove(pC); // remove card from playableCards
-        return pC; // return the PlayerCard
-    }catch (IOException | IllegalMoveException e) {
+        setLastMove(pC);                                                    // sets it to the lastMove
+        remove(pC);                                                         // remove card from playableCards
+        return pC;                                                          // return the PlayerCard
+    }catch (IOException | IllegalMoveException e) {                         // catch Exceptions
         System.out.println(e.getMessage());
     }
     return null;
