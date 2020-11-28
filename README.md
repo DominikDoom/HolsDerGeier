@@ -13,21 +13,21 @@
     <h5>Example (from Localplayer):</h5>
 </p>
 ```
-            @Override
-                   public PlayerCard getNextCard() {
-                       try {
-                           System.out.print("Your Cards left to play: ");
-                           this.cards.forEach(k -> System.out.print(k.getValue() + " "));
-                           System.out.print("\nYour card: ");
-                           final PlayerCard pC =  new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()));
-                           setLastMove(pC);
-                           remove(pC);
-                           return pC;
-                       }catch (IOException | IllegalMoveException e) {
-                           System.out.println(e.getMessage());
-                       }
-                       return null;
-                   }
+@Override
+public PlayerCard getNextCard() {
+try {
+System.out.print("Your Cards left to play: ");
+this.cards.forEach(k -> System.out.print(k.getValue() + " "));
+System.out.print("\nYour card: ");
+final PlayerCard pC =  new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()));
+setLastMove(pC);
+remove(pC);
+return pC;
+}catch (IOException | IllegalMoveException e) {
+System.out.println(e.getMessage());
+}
+return null;
+}
 ```
 <p>
     <br>
