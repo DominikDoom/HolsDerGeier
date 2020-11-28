@@ -12,7 +12,7 @@
 <p>
     <h5>Example (from Localplayer):</h5>
 </p>
-    <code>java   @Override \n
+    <code>java   @Override <br>
                    public PlayerCard getNextCard() { <br>
                        try { <br>
                            System.out.print("Your Cards left to play: "); <br>
@@ -54,3 +54,9 @@
     Kind regards,
 <br>
     <b>rabitem</b>
+    
+    ```
+git status
+git add
+git commit
+```
