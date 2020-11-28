@@ -12,7 +12,7 @@
 <p>
     <h5>Example (from Localplayer):</h5>
 </p>
-    ```java   @Override <br>
+    <code>java   @Override \n
                    public PlayerCard getNextCard() { <br>
                        try { <br>
                            System.out.print("Your Cards left to play: "); <br>
@@ -26,7 +26,7 @@
                            System.out.println(e.getMessage()); <br>
                        } <br>
                        return null; <br>
-                   }<br>```
+                   }<br></code>
 <p>
     <br>
     Maybe I'll make it less complex to override so you don't need to call <code>java protected final void setLastMove(PlayerCard lastMove)</code> and
