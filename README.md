@@ -12,6 +12,25 @@
 <p>
     <h5>Example (from Localplayer):</h5>
 </p>
+
+```java
+@Override
+public PlayerCard getNextCard() {
+    try {
+        System.out.print("Your Cards left to play: ");
+        this.cards.forEach(k -> System.out.print(k.getValue() + " "));
+        System.out.print("\nYour card: ");
+        final PlayerCard pC =  new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()));
+        setLastMove(pC); // sets it to the lastMove
+        remove(pC); // remove card from playableCards
+        return pC; // return the PlayerCard
+    }catch (IOException | IllegalMoveException e) {
+        System.out.println(e.getMessage());
+    }
+    return null;
+}
+```
+
 <p>
     <br>
     Maybe I'll make it less complex to override so you don't need to call <code>java protected final void setLastMove(PlayerCard lastMove)</code> and
@@ -39,21 +58,3 @@
     Kind regards,
 <br>
     <b>rabitem</b>
-    
-```java
-@Override
-public PlayerCard getNextCard() {
-    try {
-        System.out.print("Your Cards left to play: ");
-        this.cards.forEach(k -> System.out.print(k.getValue() + " "));
-        System.out.print("\nYour card: ");
-        final PlayerCard pC =  new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()));
-        setLastMove(pC); // sets it to the lastMove
-        remove(pC); // remove card from playableCards
-        return pC; // return the PlayerCard
-    }catch (IOException | IllegalMoveException e) {
-        System.out.println(e.getMessage());
-    }
-    return null;
-}
-```
