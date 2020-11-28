@@ -5,7 +5,7 @@
 
 <p>
     <h3>How to create your own Bot</h3>
-    You just need to extends the Player Class and Override the abstract method
+    You just need to extend the Player Class  and override the abstract method
     <br>
 </p>
 
