@@ -41,6 +41,7 @@ public PlayerCard getNextCard() {
     Maybe I'll make it less complex to override so you don't need to call 
     
     ```java protected final void setLastMove(PlayerCard lastMove)```
+    
     and
     
     ```java protected final void remove(final PlayerCard c) throws IllegalMoveException```
@@ -50,6 +51,7 @@ public PlayerCard getNextCard() {
 <br>
 <br>
 <p>
+    <h4>Rules<h4>
     For rules click <a href = "https://de.wikipedia.org/wiki/Hol%E2%80%99s_der_Geier" ><b>here</b></a>!
 </p>
 <p>
