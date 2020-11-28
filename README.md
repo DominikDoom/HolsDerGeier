@@ -1,5 +1,5 @@
 # Hols der Geier
-Hols der Geier Spiel is realized in Java as part of the module Fundamentals of Programming. 
+Hols der Geier was realized in Java as part of the module Fundamentals of Programming. 
 <br>
 <br>
 <p>
