@@ -12,21 +12,21 @@
 <p>
     <h5>Example (from Localplayer):</h5>
 </p>
-    <code>java   @Override
-                   public PlayerCard getNextCard() {
-                       try {
-                           System.out.print("Your Cards left to play: ");
-                           this.cards.forEach(k -> System.out.print(k.getValue() + " "));
-                           System.out.print("\nYour card: ");
-                           final PlayerCard pC =  new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()));
-                           setLastMove(pC);
-                           remove(pC);
-                           return pC;
-                       }catch (IOException | IllegalMoveException e) {
-                           System.out.println(e.getMessage());
-                       }
-                       return null;
-                   }</code>
+    <code>java   @Override <br>
+                   public PlayerCard getNextCard() { <br>
+                       try { <br>
+                           System.out.print("Your Cards left to play: "); <br>
+                           this.cards.forEach(k -> System.out.print(k.getValue() + " ")); <br>
+                           System.out.print("\nYour card: "); <br>
+                           final PlayerCard pC =  new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine())); <br>
+                           setLastMove(pC); <br>
+                           remove(pC); <br>
+                           return pC; <br>
+                       }catch (IOException | IllegalMoveException e) { <br>
+                           System.out.println(e.getMessage()); <br>
+                       } <br>
+                       return null; <br>
+                   }<br></code>
 <p>
     <br>
     Maybe I'll make it less complex to override so you don't need to call <code>java protected final void setLastMove(PlayerCard lastMove)</code> and
