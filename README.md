@@ -9,7 +9,5 @@ Hols der Geier Spiel is realized in Java as part of the module Fundamentals of P
 <p>
   Thank you for contributing! <br>
 </p>
-<br>
-<br>
 Kind regards,<br>
 <b>rabitem</b>
