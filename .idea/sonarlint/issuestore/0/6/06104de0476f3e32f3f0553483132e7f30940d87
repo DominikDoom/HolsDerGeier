@@ -1,0 +1,7 @@
+
+
+java:S1319"qThe type of the "values" object should be an interface such as "List" rather than the implementation "ArrayList".(í¨¥ğ8ô£ÛÒà.
+W
+java:S1118	":Add a private constructor to hide the implicit public one.(×¼­Æ8­„„Òà.
+
+java:S1319("qThe type of the "values" object should be an interface such as "List" rather than the implementation "ArrayList".(¡–™É8ø»ÜÒà.
