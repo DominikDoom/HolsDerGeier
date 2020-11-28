@@ -47,7 +47,7 @@ public PlayerCard getNextCard() {
 </p>
         
 <p>
-    <h3>Upcoming changes:</h3>
+    <h3>Upcoming changes</h3>
     <ul>
         <li>GUI Support</li>
         <li>Add more Bots (you can simply add your own and contribute to the project by cloning and create a Pull Request afterwards!)</li>
