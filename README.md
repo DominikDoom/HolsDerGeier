@@ -7,8 +7,11 @@
     <h4>How to create your own Bot</h4>
     You just need to extends the Player Class and Override the abstract method
     <br>
-    ```javascript<b>public abstract PlayerCard getNextCard();</b>```
+</p>
+    ```java public abstract PlayerCard getNextCard();```
+<p>
     <h5>Example (from Localplayer):</h5>
+</p>
     ```java   @Override
                    public PlayerCard getNextCard() {
                        try {
@@ -24,6 +27,7 @@
                        }
                        return null;
                    } ```
+<p>
     <br>
     Maybe I'll make it less complex to override so you don't need to call ```java protected final void setLastMove(PlayerCard lastMove)``` and
     ```java protected final void remove(final PlayerCard c) throws IllegalMoveException ``` on your own.
