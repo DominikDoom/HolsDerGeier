@@ -17,11 +17,10 @@ public class PointsCard extends Card {
 
     /**
      * This method is used to find out if the card is a mouse or a vulture card
-     * @param c PointsCard c
      * @return
      */
-    public static boolean isMouseCard(PointsCard c){
-        return c.getValue() > 0;
+    public boolean isMouseCard(){
+        return this.getValue() > 0;
     }
 
     /**

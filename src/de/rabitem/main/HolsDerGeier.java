@@ -132,7 +132,7 @@ public abstract class HolsDerGeier {
             currentPointCard = holsDerGeierUtil.getNextPointCard();
 
             System.out.println("-----------------");
-            if (currentPointCard.getValue() > 0)
+            if (currentPointCard.isMouseCard())
                 System.out.println("Who is going to win " + currentPointCard.getValue() + " Points?");
             else
                 System.out.println("Who is going to lose " + currentPointCard.getValue() * (-1) + " Points?");
@@ -149,7 +149,7 @@ public abstract class HolsDerGeier {
             winningValue = currentPointCard.getValue() > 0 ? Util.getHighestValue(values) : Util.getLowestValue(values);
             System.out.println("Winning Value: " + winningValue);
             for (Player p : activePlayer) {
-                if (currentPointCard.getValue() < 0) {
+                if (!currentPointCard.isMouseCard()) {
                     // negative points
                     if (p.getLastMove().getValue() == winningValue) {
                         winner.add(p);
@@ -167,7 +167,7 @@ public abstract class HolsDerGeier {
                 System.out.println("Draw! The points are redirected to the upcoming round.");
                 lastRoundPointCard.setValue(lastRoundPointCard.getValue() + currentPointCard.getValue());
             } else { // Es gibt einen Gewinner!
-                if (currentPointCard.getValue() < 0) {
+                if (!currentPointCard.isMouseCard()) {
                         for (Player p: activePlayer) {
                             if (p.getLastMove().getValue() != winningValue) {
                                 p.addPoints(currentPointCard.addValue(lastRoundPointCard).getValue());
