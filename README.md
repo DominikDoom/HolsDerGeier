@@ -5,7 +5,7 @@
 
 <p>
     <h3>How to create your own Bot</h3>
-    You just need to extend the Player Class  and override the abstract method
+    Upon opening in your favorite IDE, you just need to extend your Bot Class with the Player Class and override the abstract method
     <br>
 </p>
 
@@ -37,7 +37,7 @@ public PlayerCard getNextCard() {
 ```
 
 <p>
-    Maybe I'll make it less complex to get a Bot work so you don't need to override <code>protected final void setLastMove(PlayerCard lastMove)</code> and <code>protected final void remove(final PlayerCard c) throws IllegalMoveException</code> each time on your own.
+    Maybe I'll make it less complex to get a Bot work so you don't need to call <code>protected final void setLastMove(PlayerCard lastMove)</code> and <code>protected final void remove(final PlayerCard c) throws IllegalMoveException</code> each time on your own.
 </p>
 
 <p>
