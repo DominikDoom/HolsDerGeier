@@ -163,7 +163,7 @@ public abstract class HolsDerGeier {
                     }
                 }
             }
-            if (winner.size() > 1 || winner.isEmpty()) { // Unentschieden
+            if (winner.size() != 1) { // Unentschieden
                 /**
                  * @Credits Dominik Reh
                  * fürs Helfen bei der Implementierung mit mehreren Spielern und dem Fall des Unentschiedens!
@@ -171,7 +171,7 @@ public abstract class HolsDerGeier {
                 if (winner.size() > 1 && winner.size() != activePlayer.size()) {
                     ArrayList<Integer> drawPointCards = new ArrayList<>();
                     for (Player p: activePlayer) {
-                        if (p.getLastMove().getValue() != winningValue) {
+                        if (!winner.contains(p)) {
                             drawPointCards.add(p.getLastMove().getValue());
                         }
                     }
@@ -187,7 +187,7 @@ public abstract class HolsDerGeier {
             } else { // Es gibt einen Gewinner!
                 if (!currentPointCard.isMouseCard()) {
                         for (Player p: activePlayer) {
-                            if (p.getLastMove().getValue() != winningValue) {
+                            if (!winner.contains(p)) {
                                 p.addPoints(currentPointCard.addValue(lastRoundPointCard).getValue());
                             }
                         }
