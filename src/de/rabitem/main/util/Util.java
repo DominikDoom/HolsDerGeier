@@ -1,5 +1,11 @@
 package de.rabitem.main.util;
 
+import de.rabitem.main.xml.XMLUtil;
+import de.rabitem.main.xml.enums.XMLELEMENTSCOPYRIGHTCLAIM;
+import de.rabitem.main.xml.enums.XMLTAGS;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -43,5 +49,31 @@ public class Util {
             highestValue = i > highestValue ? i : highestValue;
         }
         return highestValue;
+    }
+
+    /**
+     * This method is used to scale an image
+     * @param srcImg to be scaled
+     * @param w width to be scaled to
+     * @param h height to be scaled to
+     * @return Image width new scaling
+     */
+    public static Image getScaledImage(Image srcImg, int w, int h) {
+        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(srcImg, 0, 0, w, h, null);
+        g2.dispose();
+
+        return resizedImg;
+    }
+
+    public static boolean hasReadCopyrightClaim() {
+        return Boolean.parseBoolean(XMLUtil.readXML(XMLTAGS.COPYRIGHTCLAIM.toString().toLowerCase(), XMLELEMENTSCOPYRIGHTCLAIM.ACCEPTED.toString().toLowerCase()));
+    }
+
+    public static void acceptCopyrightClaim() {
+        XMLUtil.changeXMLAttribute(XMLTAGS.COPYRIGHTCLAIM.toString().toLowerCase(), XMLELEMENTSCOPYRIGHTCLAIM.ACCEPTED.toString().toLowerCase(), true);
     }
 }
