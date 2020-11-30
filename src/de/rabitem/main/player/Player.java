@@ -135,10 +135,10 @@ public abstract class Player implements PlayerPlayables {
      * @return PlayerCard c
      */
     public final PlayerCard getNextCard() {
-        PlayerCard pC = getNextCardFromPlayer();
+        final PlayerCard pC = getNextCardFromPlayer();
         try {
-            setLastMove(pC);
-            remove(pC);
+            this.setLastMove(pC);
+            this.remove(pC);
         }catch (IllegalMoveException e) {
             System.out.println(e.getMessage());
         }
