@@ -10,7 +10,7 @@
 </p>
 
 ```java
-public abstract PlayerCard getNextCard();
+public abstract PlayerCard getNextCardFromPlayer();
 ```
 
 <p>
@@ -19,27 +19,19 @@ public abstract PlayerCard getNextCard();
 
 ```java
 @Override
-public PlayerCard getNextCard() {
-    try {
-        System.out.print("Your Cards left to play: ");
-        this.cards.forEach(k -> System.out.print(k.getValue() + " "));      // get available cards and print it for the user
-        System.out.print("\nYour card: ");                                  // formating reasons
-        final PlayerCard pC =  
-            new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()));
-        setLastMove(pC);                                                    // sets it to the lastMove
-        remove(pC);                                                         // remove card from playableCards
-        return pC;                                                          // return the PlayerCard
-    }catch (IOException | IllegalMoveException e) {                         // catch Exceptions
-        System.out.println(e.getMessage());
-    }
-    return null;
+public PlayerCard getNextCardFromPlayer() {
+        try {
+            System.out.print("Your Cards left to play: ");
+            this.cards.forEach(k -> System.out.print(k.getValue() + " "));
+            System.out.print("\nYour card: ");
+            final PlayerCard pC =  new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()));
+            return pC;
+        }catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
 }
 ```
-
-<p>
-    Maybe I'll make it less complex to get a Bot work so you don't need to call <code>protected final void setLastMove(PlayerCard lastMove)</code> and <code>protected final void remove(final PlayerCard c) throws IllegalMoveException</code> each time on your own.
-</p>
-
 <p>
     <h3>Rules</h3>
     For rules click <a href = "https://de.wikipedia.org/wiki/Hol%E2%80%99s_der_Geier" ><b>here</b></a>!
@@ -54,7 +46,6 @@ public PlayerCard getNextCard() {
         <li>Better Exception handling (coding my own handler)</li>
         <li>Database setup to save stats</li>
         <li>Online game vs. other players in realtime</li>
-        <li>Make Bot-adding process less laborious</li>
         <li>Use a Logger instead of System.out</li>
     </ul>
 </p>
