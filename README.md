@@ -10,7 +10,7 @@
 </p>
 
 ```java
-public abstract PlayerCard getNextCardFromPlayer();
+public abstract PlayerCard getNextCardFromPlayer(final int oldPointValue);
 ```
 
 <p>
@@ -19,13 +19,12 @@ public abstract PlayerCard getNextCardFromPlayer();
 
 ```java
 @Override
-public PlayerCard getNextCardFromPlayer() {
+public PlayerCard getNextCardFromPlayer(final int oldPointValue) {
         try {
             System.out.print("Your Cards left to play: ");
             this.cards.forEach(k -> System.out.print(k.getValue() + " "));
             System.out.print("\nYour card: ");
-            final PlayerCard pC =  new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()));
-            return pC;
+            return new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()));
         }catch (IOException e) {
             System.out.println(e.getMessage());
         }
