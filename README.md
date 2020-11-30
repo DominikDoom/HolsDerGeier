@@ -10,7 +10,7 @@
 </p>
 
 ```java
-public abstract PlayerCard getNextCardFromPlayer(final int oldPointValue);
+public abstract PlayerCard getNextCardFromPlayer(final int pointCardValue);
 ```
 
 <p>
