@@ -69,10 +69,17 @@ public class Util {
         return resizedImg;
     }
 
+    /**
+     * This method is used to check if the copyright claim was checked
+     * @return boolean hasReadCopyrightClaim
+     */
     public static boolean hasReadCopyrightClaim() {
         return Boolean.parseBoolean(XMLUtil.readXML(XMLTAGS.COPYRIGHTCLAIM.toString().toLowerCase(), XMLELEMENTSCOPYRIGHTCLAIM.ACCEPTED.toString().toLowerCase()));
     }
 
+    /**
+     * This method is used to accept the copyright claim
+     */
     public static void acceptCopyrightClaim() {
         XMLUtil.changeXMLAttribute(XMLTAGS.COPYRIGHTCLAIM.toString().toLowerCase(), XMLELEMENTSCOPYRIGHTCLAIM.ACCEPTED.toString().toLowerCase(), true);
     }

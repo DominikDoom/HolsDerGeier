@@ -131,69 +131,83 @@ public abstract class HolsDerGeier {
              */
             currentPointCard = holsDerGeierUtil.getNextPointCard();
 
+            // console output (just some information displayed)
             System.out.println("-----------------");
             if (currentPointCard.isMouseCard())
                 System.out.println("Who is going to win " + currentPointCard.getValue() + " Points?");
             else
                 System.out.println("Who is going to lose " + currentPointCard.getValue() * (-1) + " Points?");
 
+            // loop through players and get their cards, map them
             for (Player p : activePlayer) {
                 PlayerCard value = p.getNextCard(currentPointCard.getValue());
                 values.add(value.getValue());
                 usedCards.put(p, value);
             }
+
+            // output everyones card
             usedCards.forEach((k, v) -> {
                 System.out.printf("Player: %s, Card: %d%n", k.getName(), v.getValue());
             });
 
+            // get the winning value (highest value) and output it
             winningValue = Util.getHighestValue(values);
             System.out.println("Winning Value: " + winningValue);
-            System.out.println("Winning Value: " + winningValue);
+
+            // loop through the winners
             for (Player p : activePlayer) {
                 if (p.getLastMove().getValue() == winningValue) {
                     winner.add(p);
                 }
             }
-            if (winner.size() != 1) { // Unentschieden
-                /**
-                 * @Credits Dominik Reh
-                 * fürs Helfen bei der Implementierung mit mehreren Spielern und dem Fall des Unentschiedens!
-                 */
-                if (winner.size() > 1 && winner.size() != activePlayer.size()) {
-                    ArrayList<Integer> drawPointCards = new ArrayList<>();
-                    for (Player p: activePlayer) {
+
+            // winner.size() > 1 --> unentschieden
+            if (winner.size() != 1) {
+                // wenn nicht alle das Gleiche haben...
+                if (winner.size() != activePlayer.size()) {
+                    HashMap<Player, PlayerCard> drawPointCards = new HashMap<>();
+                    // füge alle Spieler zur Arraylist hinzu, die nicht den Gewinnwert haben
+                    for (Player p : activePlayer) {
                         if (p.getLastMove().getValue() != winningValue) {
-                            drawPointCards.add(p.getLastMove().getValue());
+                            drawPointCards.put(p, p.getLastMove());
                         }
                     }
-                    for (Player p: activePlayer) {
-                        if (p.getLastMove().getValue() == Util.getLowestValue(drawPointCards)){
-                            p.addPoints(currentPointCard.addValue(lastRoundPointCard).getValue());
-                        }
-                    }
+                    // suche den niedrigsten Wert
+                    // und vergebe die negativen Punkte
+                    ArrayList<Integer> drawPointCards1 = new ArrayList<>();
+                    drawPointCards.forEach((p, pc) ->
+                    {
+                        drawPointCards.forEach((p1, pc1) -> drawPointCards1.add(pc1.getValue()));
+                        if (pc.getValue() == Util.getLowestValue(drawPointCards1))
+                                p.addPoints(currentPointCard.addValue(lastRoundPointCard).getValue());
+                    });
                 } else {
+                    // richtiges Unentschieden, Punkte werden in die nächste Runde übernommen
                     System.out.println("Draw! The points are redirected to the upcoming round.");
                     lastRoundPointCard.setValue(lastRoundPointCard.getValue() + currentPointCard.getValue());
                 }
-            } else { // Es gibt einen Gewinner!
+                // Es gibt nur einen Gewinner!
+            } else {
+                // negativ Punkte an alle außer den Gewinner
                 if (!currentPointCard.isMouseCard()) {
-                        for (Player p: activePlayer) {
-                            if (!winner.contains(p)) {
-                                p.addPoints(currentPointCard.addValue(lastRoundPointCard).getValue());
-                            }
+                    for (Player p : activePlayer) {
+                        if (!winner.contains(p)) {
+                            p.addPoints(currentPointCard.addValue(lastRoundPointCard).getValue());
                         }
-                } else {
-                    for (Player p: winner) {
-                        p.addPoints(currentPointCard.addValue(lastRoundPointCard).getValue());
                     }
+                // Punkte für den Gewinner
+                } else {
+                    winner.get(0).addPoints(currentPointCard.addValue(lastRoundPointCard).getValue());
                 }
+
+                // output
                 System.out.println("The value was: " + winningValue + ". ");
 
+                // letzte Runde Karte auf 0 setzen, da kein Unentschieden
                 lastRoundPointCard = new PointsCard(0);
             }
-            for (Player p: activePlayer) {
-                System.out.println(p.getName() + " : " + p.getPoints());
-            }
+            // output points
+            activePlayer.forEach(k1 -> System.out.println(k1.getName() + " : " + k1.getPoints()));
             System.out.println();
 
             /**

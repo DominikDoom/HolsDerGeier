@@ -134,8 +134,8 @@ public abstract class Player {
      * @return PlayerCard c
      */
 
-    public final PlayerCard getNextCard(final int oldPointValue) {
-        final PlayerCard pC = getNextCardFromPlayer(oldPointValue);
+    public final PlayerCard getNextCard(final int pointCardValue) {
+        final PlayerCard pC = getNextCardFromPlayer(pointCardValue);
         try {
             this.setLastMove(pC);
             this.remove(pC);
@@ -150,7 +150,7 @@ public abstract class Player {
      * @return PlayerCard c
      */
 
-    public abstract PlayerCard getNextCardFromPlayer(final int oldPointValue);
+    public abstract PlayerCard getNextCardFromPlayer(final int pointCardValue);
 
     /**
      * Returns current Player Points

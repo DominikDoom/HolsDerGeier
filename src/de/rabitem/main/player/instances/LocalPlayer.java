@@ -19,7 +19,7 @@ public class LocalPlayer extends Player {
     }
 
     @Override
-    public PlayerCard getNextCardFromPlayer(final int oldPointValue) {
+    public PlayerCard getNextCardFromPlayer(final int pointCardValue) {
         try {
             System.out.print("Your Cards left to play: ");
             this.cards.forEach(k -> System.out.print(k.getValue() + " "));

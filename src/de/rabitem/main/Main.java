@@ -45,9 +45,9 @@ public class Main extends HolsDerGeier{
 
     public void init() {
         if (!Util.hasReadCopyrightClaim()) {
-            final JLabel message = new JLabel("<html>This project uses images that might be protected by copyright. Herewith I confirm not to abuse them and to use them only in my own sense! \n" +
+            final JLabel message = new JLabel("This project uses images that might be protected by copyright. Herewith I confirm not to abuse them and to use them only in my own sense! \n" +
                     "\n" +
-                    "This confirmation will be saved for future use!<html>");
+                    "This confirmation will be saved for future use!");
             JOptionPane.showMessageDialog(null, message, "Copyright claims", JOptionPane.INFORMATION_MESSAGE);
             Util.acceptCopyrightClaim();
         }
