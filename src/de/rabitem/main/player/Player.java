@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * @author Felix Huisinga
  */
-public abstract class Player implements PlayerPlayables {
+public abstract class Player {
     private static int count = 0;
     protected int id;
     protected String name;
