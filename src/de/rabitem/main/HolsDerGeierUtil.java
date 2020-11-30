@@ -31,4 +31,8 @@ public class HolsDerGeierUtil extends HolsDerGeier{
         pointCards.remove(retPointsCard);
         return retPointsCard;
     }
+
+    public static boolean isRunning() {
+        return isRunning;
+    }
 }

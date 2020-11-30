@@ -1,5 +1,6 @@
 package de.rabitem.main.gui;
 
+import de.rabitem.main.HolsDerGeierUtil;
 import de.rabitem.main.Main;
 import de.rabitem.main.exception.IllegalMatchSetup;
 import de.rabitem.main.exception.IllegalPlayerSize;
@@ -144,7 +145,8 @@ public class MenuFrame extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Main.getGameThread().start();
+                    if (!HolsDerGeierUtil.isRunning())
+                        Main.getGameThread().start();
                 }catch (NullPointerException e1) {
                     System.out.println(e1.getMessage());
                 }

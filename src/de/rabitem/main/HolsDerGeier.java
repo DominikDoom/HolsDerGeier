@@ -15,6 +15,8 @@ import java.util.List;
  * @author Felix Huisinga
  */
 public abstract class HolsDerGeier {
+    protected static boolean isRunning;
+
     protected final int from = 1;
     protected final int to = 15;
 
@@ -91,6 +93,7 @@ public abstract class HolsDerGeier {
      * Runs the game
      */
     private void runGame() {
+        isRunning = true;
         // fill cards
         for (int i = pointCardsFrom; i <= pointCardsTo; i++) {
             if (i == 0)
@@ -218,5 +221,7 @@ public abstract class HolsDerGeier {
             System.out.println(p.getName() + ": " + p.getPoints());
         }
         System.out.println("Winner is: " + mostPointsPlayer.getName());
+
+        isRunning = false;
     }
 }
