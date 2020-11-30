@@ -1,5 +1,6 @@
 package de.rabitem.main;
 
+import de.rabitem.main.util.GameThread;
 import de.rabitem.main.gui.MenuFrame;
 import de.rabitem.main.player.PlayerManager;
 import de.rabitem.main.player.instances.LocalPlayer;
@@ -21,6 +22,7 @@ public class Main extends HolsDerGeier{
     private static PlayerManager playerManager;
     private static Main main;
     private static HolsDerGeierUtil holsDerGeierUtil;
+    private static Thread t1;
     private JFrame mainMenuFrame;
 
     /**
@@ -63,6 +65,9 @@ public class Main extends HolsDerGeier{
         // holsDerGeierUtil.activatePlayer(new LocalPlayer("Player3"));
         // holsDerGeierUtil.activatePlayer(new LocalPlayer("Player4"));
 
+        t1 = new Thread(new GameThread());
+
+
         /**
          * GUI related setup
          */
@@ -90,11 +95,15 @@ public class Main extends HolsDerGeier{
         return holsDerGeierUtil;
     }
 
-    public JFrame getMainMenuFrame() {
-        return mainMenuFrame;
-    }
-
     public static Main getMain() {
         return main;
+    }
+
+    public static Thread getGameThread() {
+        return t1;
+    }
+
+    public JFrame getMainMenuFrame() {
+        return mainMenuFrame;
     }
 }

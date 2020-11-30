@@ -144,8 +144,8 @@ public class MenuFrame extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Main.getMain().startGame();
-                } catch (IllegalMatchSetup | IllegalPlayerSize e1) {
+                    Main.getGameThread().start();
+                }catch (NullPointerException e1) {
                     System.out.println(e1.getMessage());
                 }
             }
@@ -157,10 +157,9 @@ public class MenuFrame extends JPanel {
         super.paintComponent(g);
         final InputStream imageStream = Main.class.getResourceAsStream("/resources/mainframe/background_MainFrame.jpg");
         try {
-            final ImageIcon img = new ImageIcon(Util.getScaledImage(ImageIO.read(imageStream), Main.getMain().getMainMenuFrame().getWidth(), Main.getMain().getMainMenuFrame().getHeight()));
+            final ImageIcon img = new ImageIcon(Util.getScaledImage(ImageIO.read(imageStream), Main.getMain().getMainMenuFrame().getWidth(), Main.getMain().getMainMenuFrame().getWidth()));
             g.drawImage(img.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
         } catch (IOException e) {
-            //TODO: Exception handling
             System.out.println(e.getMessage());
         }
     }
