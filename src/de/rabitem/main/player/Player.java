@@ -10,7 +10,7 @@ import java.util.ArrayList;
 /**
  * @author Felix Huisinga
  */
-public abstract class Player implements PlayerPlayables{
+public abstract class Player implements PlayerPlayables {
     private static int count = 0;
     protected int id;
     protected String name;
@@ -19,6 +19,7 @@ public abstract class Player implements PlayerPlayables{
 
     /**
      * Constructor of Player
+     *
      * @param name String name
      */
     public Player(final String name) {
@@ -56,8 +57,9 @@ public abstract class Player implements PlayerPlayables{
 
     /**
      * Fills Arraylist with Cards
+     *
      * @param from int from
-     * @param to int to
+     * @param to   int to
      */
     public final void fillArraylist(final int from, final int to) {
         for (int i = from; i <= to; i++) {
@@ -67,6 +69,7 @@ public abstract class Player implements PlayerPlayables{
 
     /**
      * Player can use card? Still in available card?
+     *
      * @param c PlayerCard c
      * @return
      */
@@ -77,13 +80,14 @@ public abstract class Player implements PlayerPlayables{
     /**
      * This method is used to remove a PlayerCard
      * and checks if it can be used
+     *
      * @param c PlayerCard c
      */
-    protected final void remove(final PlayerCard c) throws IllegalMoveException{
+    protected final void remove(final PlayerCard c) throws IllegalMoveException {
         if (canUse(c)) {
             cards.remove(c);
             lastMove = c;
-        } else{
+        } else {
             throw new IllegalMoveException("This move is not permitted! You already used this card...");
         }
 
@@ -100,6 +104,7 @@ public abstract class Player implements PlayerPlayables{
     /**
      * Returns last move
      * null if not available
+     *
      * @return getLastMove
      */
     public final PlayerCard getLastMove() {
@@ -108,6 +113,7 @@ public abstract class Player implements PlayerPlayables{
 
     /**
      * Sets the last move executed
+     *
      * @param lastMove
      */
     protected final void setLastMove(PlayerCard lastMove) {
@@ -116,20 +122,23 @@ public abstract class Player implements PlayerPlayables{
 
     /**
      * Determs if the Player is ready to play
+     *
      * @return
      */
     public final boolean isReady() {
-        return cards.size() > 0&& lastMove == null;
+        return cards.size() > 0 && lastMove == null;
     }
 
     /**
      * Returns the next PlayerCard to play
+     *
      * @return PlayerCard c
      */
     public abstract PlayerCard getNextCard();
 
     /**
      * Returns current Player Points
+     *
      * @return int points
      */
     public final int getPoints() {
@@ -138,10 +147,22 @@ public abstract class Player implements PlayerPlayables{
 
     /**
      * Adds points to the player
+     *
      * @param add int add
      */
-    public final void addPoints(final int add){
+    public final void addPoints(final int add) {
         points += add;
+    }
+
+    /**
+     * Method to get a PlayerCard of a Player
+     * @param i int i
+     * @return
+     */
+    public final PlayerCard getCard(final int i) {
+        if (canUse(new PlayerCard(i)))
+            return cards.get(cards.indexOf(new PlayerCard(i)));
+        return null;
     }
 }
 
