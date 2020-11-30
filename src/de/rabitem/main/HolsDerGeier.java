@@ -164,8 +164,26 @@ public abstract class HolsDerGeier {
                 }
             }
             if (winner.size() > 1 || winner.isEmpty()) { // Unentschieden
-                System.out.println("Draw! The points are redirected to the upcoming round.");
-                lastRoundPointCard.setValue(lastRoundPointCard.getValue() + currentPointCard.getValue());
+                /**
+                 * @Credits Dominik Reh
+                 * fürs Helfen bei der Implementierung mit mehreren Spielern und dem Fall des Unentschiedens!
+                 */
+                if (winner.size() > 1 && winner.size() != activePlayer.size()) {
+                    ArrayList<Integer> drawPointCards = new ArrayList<>();
+                    for (Player p: activePlayer) {
+                        if (p.getLastMove().getValue() != winningValue) {
+                            drawPointCards.add(p.getLastMove().getValue());
+                        }
+                    }
+                    for (Player p: activePlayer) {
+                        if (p.getLastMove().getValue() == Util.getLowestValue(drawPointCards)){
+                            p.addPoints(currentPointCard.addValue(lastRoundPointCard).getValue());
+                        }
+                    }
+                } else {
+                    System.out.println("Draw! The points are redirected to the upcoming round.");
+                    lastRoundPointCard.setValue(lastRoundPointCard.getValue() + currentPointCard.getValue());
+                }
             } else { // Es gibt einen Gewinner!
                 if (!currentPointCard.isMouseCard()) {
                         for (Player p: activePlayer) {
@@ -180,10 +198,10 @@ public abstract class HolsDerGeier {
                 }
                 System.out.println("The value was: " + winningValue + ". ");
 
-                for (Player p: activePlayer) {
-                    System.out.println(p.getName() + " : " + p.getPoints());
-                }
                 lastRoundPointCard = new PointsCard(0);
+            }
+            for (Player p: activePlayer) {
+                System.out.println(p.getName() + " : " + p.getPoints());
             }
             System.out.println();
 

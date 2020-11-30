@@ -57,9 +57,11 @@ public class Main extends HolsDerGeier{
         /**
          * Setup player
          */
-        holsDerGeierUtil.activatePlayer(new RandomPlayer("Player1"));
-        holsDerGeierUtil.activatePlayer(new LocalPlayer("Player2"));
-        holsDerGeierUtil.activatePlayer(new RandomPlayer("Player3"));
+        //TODO: run LocalPlayer in a second Thread
+        holsDerGeierUtil.activatePlayer(new LocalPlayer("Player1"));
+        holsDerGeierUtil.activatePlayer(new RandomPlayer("Player2"));
+        // holsDerGeierUtil.activatePlayer(new LocalPlayer("Player3"));
+        // holsDerGeierUtil.activatePlayer(new LocalPlayer("Player4"));
 
         /**
          * GUI related setup
