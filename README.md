@@ -41,7 +41,6 @@ public PlayerCard getNextCardFromPlayer() {
     <h3>Upcoming changes</h3>
     <ul>
         <li>GUI Support</li>
-        <li>Multi Thread Support</li>
         <li>Add more Bots (you can simply add your own and contribute to the project by cloning and create a Pull Request afterwards!)</li>
         <li>Better Exception handling (coding my own handler)</li>
         <li>Database setup to save stats</li>
