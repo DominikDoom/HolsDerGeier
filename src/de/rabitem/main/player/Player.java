@@ -3,7 +3,6 @@ package de.rabitem.main.player;
 import de.rabitem.main.Main;
 import de.rabitem.main.card.instances.PlayerCard;
 import de.rabitem.main.exception.IllegalMoveException;
-import de.rabitem.main.util.Util;
 
 import java.util.ArrayList;
 
@@ -134,8 +133,9 @@ public abstract class Player {
      *
      * @return PlayerCard c
      */
-    public final PlayerCard getNextCard() {
-        final PlayerCard pC = getNextCardFromPlayer();
+
+    public final PlayerCard getNextCard(final int oldPointValue) {
+        final PlayerCard pC = getNextCardFromPlayer(oldPointValue);
         try {
             this.setLastMove(pC);
             this.remove(pC);
@@ -149,8 +149,8 @@ public abstract class Player {
      * Returns the next PlayerCard to play from the custom Players
      * @return PlayerCard c
      */
-    
-    public abstract PlayerCard getNextCardFromPlayer();
+
+    public abstract PlayerCard getNextCardFromPlayer(final int oldPointValue);
 
     /**
      * Returns current Player Points

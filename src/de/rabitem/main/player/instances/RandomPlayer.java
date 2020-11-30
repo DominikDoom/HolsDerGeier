@@ -1,8 +1,6 @@
 package de.rabitem.main.player.instances;
 
-import de.rabitem.main.Main;
 import de.rabitem.main.card.instances.PlayerCard;
-import de.rabitem.main.exception.IllegalMoveException;
 import de.rabitem.main.player.Player;
 import de.rabitem.main.util.Util;
 
@@ -19,8 +17,7 @@ public class RandomPlayer extends Player {
     }
 
     @Override
-    public PlayerCard getNextCardFromPlayer() {
-        final PlayerCard pC = cards.get(Util.random(0, cards.size() - 1));
-        return pC;
+    public PlayerCard getNextCardFromPlayer(final int oldPointValue) {
+        return cards.get(Util.random(0, cards.size() - 1));
     }
 }

@@ -138,7 +138,7 @@ public abstract class HolsDerGeier {
                 System.out.println("Who is going to lose " + currentPointCard.getValue() * (-1) + " Points?");
 
             for (Player p : activePlayer) {
-                PlayerCard value = p.getNextCard();
+                PlayerCard value = p.getNextCard(currentPointCard.getValue());
                 values.add(value.getValue());
                 usedCards.put(p, value);
             }
@@ -146,21 +146,12 @@ public abstract class HolsDerGeier {
                 System.out.printf("Player: %s, Card: %d%n", k.getName(), v.getValue());
             });
 
-            winningValue = currentPointCard.getValue() > 0 ? Util.getHighestValue(values) : Util.getLowestValue(values);
+            winningValue = Util.getHighestValue(values);
+            System.out.println("Winning Value: " + winningValue);
             System.out.println("Winning Value: " + winningValue);
             for (Player p : activePlayer) {
-                if (!currentPointCard.isMouseCard()) {
-                    // negative points
-                    if (p.getLastMove().getValue() == winningValue) {
-                        winner.add(p);
-                    }
-
-                    // positive points
-                } else {
-                    // declare if has winningValue
-                    if (p.getLastMove().getValue() == winningValue) {
-                        winner.add(p);
-                    }
+                if (p.getLastMove().getValue() == winningValue) {
+                    winner.add(p);
                 }
             }
             if (winner.size() != 1) { // Unentschieden
@@ -171,7 +162,7 @@ public abstract class HolsDerGeier {
                 if (winner.size() > 1 && winner.size() != activePlayer.size()) {
                     ArrayList<Integer> drawPointCards = new ArrayList<>();
                     for (Player p: activePlayer) {
-                        if (!winner.contains(p)) {
+                        if (p.getLastMove().getValue() != winningValue) {
                             drawPointCards.add(p.getLastMove().getValue());
                         }
                     }
