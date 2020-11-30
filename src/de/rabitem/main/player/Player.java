@@ -134,7 +134,7 @@ public abstract class Player implements PlayerPlayables {
      *
      * @return PlayerCard c
      */
-    public PlayerCard getNextCard() {
+    public final PlayerCard getNextCard() {
         PlayerCard pC = getNextCardFromPlayer();
         try {
             setLastMove(pC);
