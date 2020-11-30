@@ -19,14 +19,8 @@ public class RandomPlayer extends Player {
     }
 
     @Override
-    public PlayerCard getNextCard() {
+    public PlayerCard getNextCardFromPlayer() {
         final PlayerCard pC = cards.get(Util.random(0, cards.size() - 1));
-        setLastMove(pC);
-        try {
-            remove(pC);
-        }catch (IllegalMoveException e) {
-            System.out.println(e.getMessage());
-        }
-        return lastMove;
+        return pC;
     }
 }

@@ -134,7 +134,23 @@ public abstract class Player implements PlayerPlayables {
      *
      * @return PlayerCard c
      */
-    public abstract PlayerCard getNextCard();
+    public PlayerCard getNextCard() {
+        PlayerCard pC = getNextCardFromPlayer();
+        try {
+            setLastMove(pC);
+            remove(pC);
+        }catch (IllegalMoveException e) {
+            System.out.println(e.getMessage());
+        }
+        return pC;
+    }
+
+    /**
+     * Returns the next PlayerCard to play from the custom Players
+     * @return PlayerCard c
+     */
+    
+    public abstract PlayerCard getNextCardFromPlayer();
 
     /**
      * Returns current Player Points
