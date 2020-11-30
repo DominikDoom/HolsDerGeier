@@ -31,7 +31,7 @@ public abstract class HolsDerGeier {
     private PointsCard currentPointCard = new PointsCard(0);
     private PointsCard lastRoundPointCard = new PointsCard(0);
 
-    protected static ArrayList<Player> activePlayer = new ArrayList<>();
+    public static ArrayList<Player> activePlayer = new ArrayList<>();
 
     /**
      * Arraylist which contains all cards (range: -5 --> 10)

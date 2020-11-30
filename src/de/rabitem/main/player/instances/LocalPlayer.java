@@ -1,5 +1,6 @@
 package de.rabitem.main.player.instances;
 
+import de.rabitem.main.Main;
 import de.rabitem.main.card.instances.PlayerCard;
 import de.rabitem.main.exception.IllegalMoveException;
 import de.rabitem.main.player.Player;

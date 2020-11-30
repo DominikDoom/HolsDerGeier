@@ -62,9 +62,9 @@ public class XMLUtil {
             final TransformerFactory transformerFactory = TransformerFactory.newInstance();
             final Transformer transformer = transformerFactory.newTransformer();
             final DOMSource source = new DOMSource(doc);
-            final StreamResult result = new StreamResult(String.valueOf(Main.class.getResource("/resources/config.xml").toURI()));
+            final StreamResult result = new StreamResult(Main.class.getResourceAsStream("/resources/config.xml").toString());
             transformer.transform(source, result);
-        }catch (TransformerException | URISyntaxException e) {
+        }catch (TransformerException e) {
             System.out.println(e.getMessage());
         }
     }
