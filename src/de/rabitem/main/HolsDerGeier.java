@@ -114,9 +114,6 @@ public abstract class HolsDerGeier {
         // winning card value
         int winningValue;
 
-        // count winners
-        int winners = 0;
-
         HashMap<Player, PlayerCard> usedCards = new HashMap<Player, PlayerCard>();
 
         System.out.println("We are about to play: " + rounds + " rounds with " + holsDerGeierUtil.getActivePlayers() + " Players!");
@@ -156,31 +153,38 @@ public abstract class HolsDerGeier {
 
             // loop through the winners
             for (Player p : activePlayer) {
-                if (p.getLastMove().getValue() == winningValue) {
-                    winner.add(p);
+                if (currentPointCard.isMouseCard()) {
+                    if (p.getLastMove().getValue() == winningValue) {
+                        winner.add(p);
+                    }
+                } else {
+                    if (p.getLastMove().getValue() != winningValue) {
+                        winner.add(p);
+                    }
                 }
             }
 
             // winner.size() > 1 --> unentschieden
-            if (winner.size() != 1) {
+            if (winner.size() > 1) {
                 // wenn nicht alle das Gleiche haben...
                 if (winner.size() != activePlayer.size()) {
-                    HashMap<Player, PlayerCard> drawPointCards = new HashMap<>();
-                    // füge alle Spieler zur Arraylist hinzu, die nicht den Gewinnwert haben
-                    for (Player p : activePlayer) {
-                        if (p.getLastMove().getValue() != winningValue) {
-                            drawPointCards.put(p, p.getLastMove());
+                    if (!currentPointCard.isMouseCard()) {
+                        ArrayList<Integer> drawValues = new ArrayList<>();
+                        for (Player p : activePlayer) {
+                            if (!winner.contains(p)){
+                                drawValues.add(p.getLastMove().getValue());
+                            }
                         }
-                    }
-                    // suche den niedrigsten Wert
-                    // und vergebe die negativen Punkte
-                    ArrayList<Integer> drawPointCards1 = new ArrayList<>();
-                    drawPointCards.forEach((p, pc) ->
-                    {
-                        drawPointCards.forEach((p1, pc1) -> drawPointCards1.add(pc1.getValue()));
-                        if (pc.getValue() == Util.getLowestValue(drawPointCards1))
+                        for(Player p : activePlayer) {
+                            if (Util.getLowestValue(drawValues) == p.getLastMove().getValue() && !winner.contains(p)){
                                 p.addPoints(currentPointCard.addValue(lastRoundPointCard).getValue());
-                    });
+                                drawValues.clear();
+                            }
+                        }
+                    } else {
+                        System.out.println("Draw! The points are redirected to the upcoming round.");
+                        lastRoundPointCard.setValue(lastRoundPointCard.getValue() + currentPointCard.getValue());
+                    }
                 } else {
                     // richtiges Unentschieden, Punkte werden in die nächste Runde übernommen
                     System.out.println("Draw! The points are redirected to the upcoming round.");
@@ -214,7 +218,6 @@ public abstract class HolsDerGeier {
              * Diese Sektion ggf. auslagern!
              */
             winningValue = 0;
-            winners = 0;
             winner.clear();
             values.clear();
             usedCards.clear();
