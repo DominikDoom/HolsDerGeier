@@ -192,7 +192,7 @@ public abstract class Player {
     }
 
     /**
-     * Method to set a opnnent
+     * Method to set a opponent
      */
     public final void setOponnents() {
         ArrayList<Player> players = HolsDerGeierUtil.getActivePlayers();
@@ -201,7 +201,7 @@ public abstract class Player {
     }
 
     /**
-     * Method to get oponnents
+     * Method to get opponents
      * @return ArrayList<Player>
      */
     protected final ArrayList<Player> getOponnents() {
