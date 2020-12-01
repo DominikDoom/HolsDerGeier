@@ -33,7 +33,7 @@ public abstract class HolsDerGeier {
     private PointsCard currentPointCard = new PointsCard(0);
     private PointsCard lastRoundPointCard = new PointsCard(0);
 
-    public static ArrayList<Player> activePlayer = new ArrayList<>();
+    protected static ArrayList<Player> activePlayer = new ArrayList<>();
 
     /**
      * Arraylist which contains all cards (range: -5 --> 10)
@@ -119,7 +119,7 @@ public abstract class HolsDerGeier {
 
         HashMap<Player, PlayerCard> usedCards = new HashMap<Player, PlayerCard>();
 
-        System.out.println("We are about to play: " + rounds + " rounds with " + holsDerGeierUtil.getActivePlayers() + " Players!");
+        System.out.println("We are about to play: " + rounds + " rounds with " + holsDerGeierUtil.getActivePlayersSize() + " Players!");
         System.out.println();
         /**
          * Loop until there are no PointCards left

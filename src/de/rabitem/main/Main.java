@@ -64,6 +64,8 @@ public class Main extends HolsDerGeier{
         holsDerGeierUtil.activatePlayer(new LocalPlayer("Player3"));
         holsDerGeierUtil.activatePlayer(new LocalPlayer("Player4"));
 
+        HolsDerGeierUtil.getActivePlayers().forEach(p -> p.setOponnents());
+
         t1 = new Thread(new GameThread());
 
 

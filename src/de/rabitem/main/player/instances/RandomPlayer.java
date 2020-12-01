@@ -18,6 +18,6 @@ public class RandomPlayer extends Player {
 
     @Override
     public PlayerCard getNextCardFromPlayer(final int pointCardValue) {
-        return cards.get(Util.random(0, cards.size() - 1));
+        return getCards().get(Util.random(0, getCards().size() - 1));
     }
 }

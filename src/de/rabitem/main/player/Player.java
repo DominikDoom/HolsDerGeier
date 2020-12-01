@@ -1,5 +1,6 @@
 package de.rabitem.main.player;
 
+import de.rabitem.main.HolsDerGeierUtil;
 import de.rabitem.main.Main;
 import de.rabitem.main.card.instances.PlayerCard;
 import de.rabitem.main.exception.IllegalMoveException;
@@ -15,6 +16,7 @@ public abstract class Player {
     protected String name;
     protected PlayerCard lastMove = null;
     private int points;
+    protected ArrayList<Player> oponnents = new ArrayList<>();
 
     /**
      * Constructor of Player
@@ -52,7 +54,7 @@ public abstract class Player {
     /**
      * Arraylist which contains the Cards
      */
-    protected final ArrayList<PlayerCard> cards = new ArrayList<>();
+    private final ArrayList<PlayerCard> cards = new ArrayList<>();
 
     /**
      * Fills Arraylist with Cards
@@ -179,6 +181,31 @@ public abstract class Player {
         if (canUse(new PlayerCard(i)))
             return cards.get(cards.indexOf(new PlayerCard(i)));
         return null;
+    }
+
+    /**
+     * Method to get all Cards played
+     * @return ArrayList<PlayerCard>
+     */
+    public final ArrayList<PlayerCard> getCards() {
+        return cards;
+    }
+
+    /**
+     * Method to set a opnnent
+     */
+    public final void setOponnents() {
+        ArrayList<Player> players = HolsDerGeierUtil.getActivePlayers();
+        players.remove(this.name);
+        oponnents = players;
+    }
+
+    /**
+     * Method to get oponnents
+     * @return ArrayList<Player>
+     */
+    protected final ArrayList<Player> getOponnents() {
+        return oponnents;
     }
 }
 
