@@ -2,8 +2,9 @@ package de.rabitem.main.gui;
 
 import de.rabitem.main.HolsDerGeierUtil;
 import de.rabitem.main.Main;
-import de.rabitem.main.exception.IllegalMatchSetup;
-import de.rabitem.main.exception.IllegalPlayerSize;
+import de.rabitem.main.listener.OnGameOverListener;
+import de.rabitem.main.player.Player;
+import de.rabitem.main.util.StatsManager;
 import de.rabitem.main.util.Util;
 
 import javax.imageio.ImageIO;
@@ -11,15 +12,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 
 /**
  * @author Felix Huisinga
  */
 public class MenuFrame extends JPanel {
-
     private String text = "Hols der Geier";
     private int charIndex = 0;
 
@@ -30,6 +30,9 @@ public class MenuFrame extends JPanel {
     private JButton bOptions = null;
     private JButton bClose = null;
 
+    /**
+     * Constructor of MenuFrame
+     */
     public MenuFrame() {
         super();
         /**
@@ -116,27 +119,11 @@ public class MenuFrame extends JPanel {
         });
         timer.start();
 
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            // If Nimbus is not available, fall back to cross-platform
-            try {
-                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-            } catch (Exception ex) {
-                System.out.println(e.getMessage());
-            }
-        }
-
         // Action Listener
         bClose.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                //TODO: safe stats to DB
+                //TODO: safe stats
                 System.exit(0);
             }
         });
@@ -144,25 +131,27 @@ public class MenuFrame extends JPanel {
         bStartGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                try {
-                    if (!HolsDerGeierUtil.isRunning())
-                        Main.getGameThread().start();
-                }catch (NullPointerException e1) {
-                    System.out.println(e1.getMessage());
-                }
+                Main.getMain().actionManager.bStartAction();
+            }
+        });
+
+        bOptions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.getMain().actionManager.bOptionsAction();
             }
         });
     }
 
+    /**
+     * Override this method to paint the background image
+     *
+     * @param g Graphics g
+     */
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        final InputStream imageStream = Main.class.getResourceAsStream("/resources/mainframe/background_MainFrame.jpg");
-        try {
-            final ImageIcon img = new ImageIcon(Util.getScaledImage(ImageIO.read(imageStream), Main.getMain().getMainMenuFrame().getWidth(), Main.getMain().getMainMenuFrame().getWidth()));
-            g.drawImage(img.getImage(), 0, 0, this.getWidth(), this.getHeight(), null);
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+        final String url = "/resources/menuframe/background_MenuFrame.jpg";
+        GUIUtil.drawImageToBackground(this, g, url);
     }
 }

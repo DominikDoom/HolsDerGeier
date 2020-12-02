@@ -83,4 +83,28 @@ public class Util {
     public static void acceptCopyrightClaim() {
         XMLUtil.changeXMLAttribute(XMLTAGS.COPYRIGHTCLAIM.toString().toLowerCase(), XMLELEMENTSCOPYRIGHTCLAIM.ACCEPTED.toString().toLowerCase(), true);
     }
+
+    /**
+     * Simple bubbleSort Algorithm for ArrayList containing Integers
+     * @param list ArrayList<Integer> list
+     * @return ArrayList<Integer> list
+     */
+    public static ArrayList<Integer> bubbleSort(ArrayList<Integer> list) {
+
+        int n = list.size();
+        int temp = 0;
+
+        for (int i = 0; i < n-1; i++) {
+            for (int j = 0; j < (n - i - 1); j++) {
+
+                if (list.get(j) > list.get(j+1)) {
+                    temp = list.get(j);
+                    list.set(j,list.get(j+1));
+                    list.set(j+1, temp);
+                }
+
+            }
+        }
+        return list;
+    }
 }

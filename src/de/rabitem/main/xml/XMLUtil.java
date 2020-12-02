@@ -56,9 +56,6 @@ public class XMLUtil {
                 eElement.getElementsByTagName(element.toLowerCase()).item(0).setTextContent(value.toString());
             }
         }
-
-        System.out.println(value.toString());
-
         /**
          * write it back to the xml
          */

@@ -15,8 +15,12 @@ public abstract class Player {
     protected int id;
     protected String name;
     protected PlayerCard lastMove = null;
-    private int points;
+    private int points = 0;
     protected ArrayList<Player> oponnents = new ArrayList<>();
+    protected int totalPoints = 0;
+    private int winCounter = 0;
+
+    private int placeLastRound = -1;
 
     /**
      * Constructor of Player
@@ -24,8 +28,7 @@ public abstract class Player {
      * @param name String name
      */
     public Player(final String name) {
-        this.id = count + 1;
-        count++;
+        this.id = count++ + 1;
         this.name = name;
         Main.getPlayerManager().registerPlayer(this);
     }
@@ -48,7 +51,7 @@ public abstract class Player {
 
     @Override
     public String toString() {
-        return "Spieler: " + this.name + "(Id: " + this.id + ")";
+        return "Spieler: " + this.name + " (Id: " + this.id + ")";
     }
 
     /**
@@ -100,6 +103,8 @@ public abstract class Player {
     public void reset() {
         cards.clear();
         lastMove = null;
+        this.fillArraylist(Main.getHolsDerGeierUtil().fromCards(), Main.getHolsDerGeierUtil().toCards());
+        this.placeLastRound = -1;
     }
 
     /**
@@ -141,7 +146,7 @@ public abstract class Player {
         try {
             this.setLastMove(pC);
             this.remove(pC);
-        }catch (IllegalMoveException e) {
+        } catch (IllegalMoveException e) {
             System.out.println(e.getMessage());
         }
         return pC;
@@ -149,6 +154,7 @@ public abstract class Player {
 
     /**
      * Returns the next PlayerCard to play from the custom Players
+     *
      * @return PlayerCard c
      */
 
@@ -164,6 +170,15 @@ public abstract class Player {
     }
 
     /**
+     * This method is used to set the player points
+     *
+     * @param points int points
+     */
+    private final void setPoints(int points) {
+        this.points = points;
+    }
+
+    /**
      * Adds points to the player
      *
      * @param add int add
@@ -174,6 +189,7 @@ public abstract class Player {
 
     /**
      * Method to get a PlayerCard of a Player
+     *
      * @param i int i
      * @return
      */
@@ -185,6 +201,7 @@ public abstract class Player {
 
     /**
      * Method to get all Cards played
+     *
      * @return ArrayList<PlayerCard>
      */
     public final ArrayList<PlayerCard> getCards() {
@@ -194,7 +211,7 @@ public abstract class Player {
     /**
      * Method to set a opponent
      */
-    public final void setOponnents() {
+    public final void setOpponents() {
         ArrayList<Player> players = HolsDerGeierUtil.getActivePlayers();
         players.remove(this.name);
         oponnents = players;
@@ -202,10 +219,72 @@ public abstract class Player {
 
     /**
      * Method to get opponents
+     *
      * @return ArrayList<Player>
      */
     protected final ArrayList<Player> getOponnents() {
         return oponnents;
+    }
+
+    /**
+     * Sets the place of last round
+     *
+     * @param placeLastRound
+     */
+    public void setPlaceLastRound(int placeLastRound) {
+        this.placeLastRound = placeLastRound;
+    }
+
+    /**
+     * Increments WinCounter by 1
+     */
+    public void incWinCounter() {
+        if (this.placeLastRound == 1) {
+            winCounter++;
+        }
+    }
+
+    /**
+     * Returns the place of last round
+     *
+     * @return int getPlaceLastRound
+     */
+    public int getPlaceLastRound() {
+        return placeLastRound;
+    }
+
+    /**
+     * Returns the total points across all rounds played
+     *
+     * @return int totalPoints
+     */
+    public final int getTotalPoints() {
+        return totalPoints;
+    }
+
+    /**
+     * Adds points to the player total points
+     *
+     * @param totalPoints int totalPoints
+     */
+    private final void addTotalPoints(final int totalPoints) {
+        this.totalPoints = this.totalPoints + totalPoints;
+    }
+
+    /**
+     * This method is used to mapTotalPoints
+     */
+    public final void mapTotalPoints() {
+        this.addTotalPoints(this.getPoints());
+        this.setPoints(0);
+    }
+
+    /**
+     * Returns the count of wins
+     * @return int getWinCounter
+     */
+    public int getWinCounter() {
+        return winCounter;
     }
 }
 

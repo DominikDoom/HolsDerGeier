@@ -34,4 +34,12 @@ public class PlayerManager {
     public int getPlayerCount() {
         return playerList.size();
     }
+
+    /**
+     * This method is used to get the PlayerList
+     * @return ArrayList<Player> getPlayerList
+     */
+    public ArrayList<Player> getPlayerList() {
+        return playerList;
+    }
 }
