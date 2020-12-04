@@ -43,7 +43,6 @@ public PlayerCard getNextCardFromPlayer(final int oldPointValue) {
         <li>Add more Bots (you can simply add your own and contribute to the project by cloning and create a Pull Request afterwards!)</li>
         <li>Better Exception handling (coding my own handler)</li>
         <li>Database setup to save stats</li>
-        <li>Online game vs. other players in realtime</li>
         <li>Use a Logger instead of System.out</li>
     </ul>
 </p>
