@@ -5,7 +5,7 @@
 
 <p>
     <h3>How to create your own Bot</h3>
-    Upon opening in your favorite IDE, you just need to extend your Bot Class with the Player Class and override the abstract method. After that you' ll adjust the <code>public static void activatePlayer()</code> in main by simply adding your Bot!
+    Upon opening in your favorite IDE, you just need to extend your Bot Class with the Player Class and override the abstract method. After that you just have to adjust the <code>public static void activatePlayer()</code> in main by simply adding your Bot!
     <br>
 </p>
 
