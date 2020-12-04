@@ -67,6 +67,8 @@ public abstract class Player {
      */
     public final void fillArraylist(final int from, final int to) {
         for (int i = from; i <= to; i++) {
+            if (i == 0)
+                continue;
             cards.add(new PlayerCard(i));
         }
     }

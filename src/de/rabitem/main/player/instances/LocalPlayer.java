@@ -27,6 +27,7 @@ public class LocalPlayer extends Player {
             return new PlayerCard(Integer.parseInt(new BufferedReader(new InputStreamReader(System.in)).readLine()));
         }catch (IOException e) {
             System.out.println(e.getMessage());
+            this.getNextCard(pointCardValue);
         }
         return null;
     }

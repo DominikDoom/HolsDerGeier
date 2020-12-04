@@ -1,18 +1,22 @@
 package de.rabitem.main;
 
-import de.rabitem.main.gui.*;
-import de.rabitem.main.player.Player;
-import de.rabitem.main.player.instances.RandomPlayer;
-import de.rabitem.main.util.GameThread;
+import de.rabitem.main.gui.ActionManager;
+import de.rabitem.main.gui.GUIUtil;
+import de.rabitem.main.gui.MenuFrame;
+import de.rabitem.main.gui.OptionFrame;
 import de.rabitem.main.player.PlayerManager;
 import de.rabitem.main.player.instances.LocalPlayer;
+import de.rabitem.main.player.instances.RandomPlayer;
+import de.rabitem.main.util.GameThread;
 import de.rabitem.main.util.StatsManager;
 import de.rabitem.main.util.Util;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.util.ArrayList;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -31,12 +35,15 @@ public class Main extends HolsDerGeier {
 
     private static GameThread gameThreadRunnable = null;
 
-    public final ActionManager actionManager =  new ActionManager();
+    public final ActionManager actionManager = new ActionManager();
 
     private StatsManager statsManager = null;
 
+    public static ArrayList<String> enabledPlayers = new ArrayList<>();
+
     /**
      * Main method, starting point of the program!
+     *
      * @param args String[] args
      */
     public static void main(String[] args) {
@@ -47,6 +54,7 @@ public class Main extends HolsDerGeier {
 
     /**
      * Returns the PlayerManager
+     *
      * @return playerManager
      */
     public static PlayerManager getPlayerManager() {
@@ -64,6 +72,20 @@ public class Main extends HolsDerGeier {
             JOptionPane.showMessageDialog(null, message, "Copyright claims", JOptionPane.INFORMATION_MESSAGE);
             Util.acceptCopyrightClaim();
         }
+
+        File[] files;
+        try {
+            //If this pathname does not denote a directory, then listFiles() returns null.
+            files = new File(Main.class.getResource("/de/rabitem/main/player/instances").toURI()).listFiles();
+            for (File file : files) {
+                if (file.isFile()) {
+                    enabledPlayers.add(file.getName().substring(0, file.getName().length() - 6));
+                }
+            }
+        } catch (URISyntaxException | NullPointerException e) {
+            System.out.println(e.getMessage());
+        }
+
         /**
          * Initialize utility methods
          */
@@ -84,21 +106,18 @@ public class Main extends HolsDerGeier {
     /**
      * Here you can activate your player...
      */
-    public static String[] enabledPlayers = new String[]{"RandomPlayer", "LocalPlayer"};
+
     public static void activatePlayer() {
         /* holsDerGeierUtil.activatePlayer(new RandomPlayer("Player1"));
         holsDerGeierUtil.activatePlayer(new RandomPlayer("Player2"));
         holsDerGeierUtil.activatePlayer(new LocalPlayer("Player3"));
         holsDerGeierUtil.activatePlayer(new RandomPlayer("Player4")); */
-
-        if (ActionManagerUtil.getRoundsPlayed() > 1)
-            return;
-
         int count = 1;
-        for (JComboBox comboBox : Main.getOptionsPanel().getComboBoxes()){
-            if(comboBox.getSelectedItem().toString().equalsIgnoreCase(enabledPlayers[0])){
+        for (JComboBox comboBox : Main.getOptionsPanel().getComboBoxes()) {
+            // TODO: classloader, make this progress less stressful
+            if (comboBox.getSelectedItem().toString().equalsIgnoreCase(enabledPlayers.get(0))) {
                 holsDerGeierUtil.activatePlayer(new RandomPlayer("Player " + count));
-            } else if(comboBox.getSelectedItem().toString().equalsIgnoreCase(enabledPlayers[1])){
+            } else if (comboBox.getSelectedItem().toString().equalsIgnoreCase(enabledPlayers.get(1))) {
                 holsDerGeierUtil.activatePlayer(new LocalPlayer("Player " + count));
             }
             count++;
@@ -108,12 +127,15 @@ public class Main extends HolsDerGeier {
     /**
      * This method is used to setup the menu-frame
      */
+    public int framesWidth = 900;
+    public int framesHeight = 600;
+
     public JFrame setupFrame(final JPanel jPanel, final String backgroundURL) {
         GUIUtil.setUIManager();
         final JFrame frame = new JFrame();
         frame.setContentPane(jPanel);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setSize(900, 600);
+        frame.setSize(this.framesWidth, this.framesHeight);
         frame.setUndecorated(true);
         frame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);
         frame.setLocationRelativeTo(null);
@@ -128,6 +150,7 @@ public class Main extends HolsDerGeier {
 
     /**
      * Returns the HolsDerGeierUtil instance
+     *
      * @return HolsDerGeierUtil
      */
     public static HolsDerGeierUtil getHolsDerGeierUtil() {
@@ -136,6 +159,7 @@ public class Main extends HolsDerGeier {
 
     /**
      * This method is used to return the Main Instance
+     *
      * @return Main getMain
      */
     public static Main getMain() {
@@ -144,6 +168,7 @@ public class Main extends HolsDerGeier {
 
     /**
      * This method is used to return the GameThread
+     *
      * @return GameThread getGameThread
      */
     public static Thread getGameThread() {
@@ -156,6 +181,7 @@ public class Main extends HolsDerGeier {
 
     /**
      * This method is used to return the MainMenuFrame
+     *
      * @return JFrame getMainMenuFrame
      */
     public static JFrame getMainMenuFrame() {
@@ -164,6 +190,7 @@ public class Main extends HolsDerGeier {
 
     /**
      * This method is used to return the OptionsFrame
+     *
      * @return JFrame OptionsFrame
      */
     public static JFrame getOptionsFrame() {
@@ -172,6 +199,7 @@ public class Main extends HolsDerGeier {
 
     /**
      * This method is used to return the OptionsFrame JPanel
+     *
      * @return OptionFrame getOptionsPanel
      */
     public static OptionFrame getOptionsPanel() {
@@ -180,6 +208,7 @@ public class Main extends HolsDerGeier {
 
     /**
      * Returns the StatsManager
+     *
      * @return StatsManager getStatsManager
      */
     public StatsManager getStatsManager() {
@@ -188,6 +217,7 @@ public class Main extends HolsDerGeier {
 
     /**
      * Sets the Stats Manager
+     *
      * @param statsManager
      */
     public void setStatsManager(StatsManager statsManager) {
@@ -199,5 +229,12 @@ public class Main extends HolsDerGeier {
         this.onSetupFinished();
     }
 
-
+    /**
+     * This method is used to return the ActionManager
+     *
+     * @return
+     */
+    public ActionManager getActionManager() {
+        return actionManager;
+    }
 }

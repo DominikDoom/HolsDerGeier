@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * @author Peter Walser (https://stackoverflow.com/users/63293/peter-walser)
  */
-class StyledButtonUI extends BasicButtonUI {
+public class StyledButtonUI extends BasicButtonUI {
 
     @Override
     public void installUI (JComponent c) {

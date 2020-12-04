@@ -1,20 +1,11 @@
 package de.rabitem.main.gui;
 
-import de.rabitem.main.HolsDerGeierUtil;
 import de.rabitem.main.Main;
-import de.rabitem.main.listener.OnGameOverListener;
-import de.rabitem.main.player.Player;
-import de.rabitem.main.util.StatsManager;
-import de.rabitem.main.util.Util;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
 
 /**
  * @author Felix Huisinga
@@ -131,14 +122,14 @@ public class MenuFrame extends JPanel {
         bStartGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.getMain().actionManager.bStartAction();
+                Main.getMain().getActionManager().bStartAction();
             }
         });
 
         bOptions.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.getMain().actionManager.bOptionsAction();
+                Main.getMain().getActionManager().bOptionsAction();
             }
         });
     }

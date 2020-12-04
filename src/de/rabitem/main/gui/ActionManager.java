@@ -2,6 +2,7 @@ package de.rabitem.main.gui;
 
 import de.rabitem.main.HolsDerGeierUtil;
 import de.rabitem.main.Main;
+import de.rabitem.main.exception.IllegalMatchSetup;
 import de.rabitem.main.listener.OnGameOverListener;
 import de.rabitem.main.listener.OnSetupFinished;
 import de.rabitem.main.player.Player;
@@ -18,6 +19,12 @@ public class ActionManager {
 
     public void bStartAction() {
         roundsPlayed[0]++;
+        try {
+            Main.getHolsDerGeierUtil().setCardRange(Main.getOptionsPanel().getTfCardsFrom(), Main.getOptionsPanel().getTfCardsTo());
+        }catch (IllegalMatchSetup e) {
+            System.out.println(e.getMessage());
+            return;
+        }
         Main.getMainMenuFrame().setVisible(false);
         Main.getGameThread().start();
 
@@ -60,6 +67,10 @@ public class ActionManager {
         if (!Main.getOptionsFrame().isVisible()) {
             Main.getOptionsFrame().setVisible(true);
         }
+    }
+
+    public void bOptionsAddPlayer() {
+
     }
 
     public StatsFrame getStatsPanel() {

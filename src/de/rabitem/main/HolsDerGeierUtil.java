@@ -1,6 +1,7 @@
 package de.rabitem.main;
 
 import de.rabitem.main.card.instances.PointsCard;
+import de.rabitem.main.exception.IllegalMatchSetup;
 import de.rabitem.main.player.Player;
 import de.rabitem.main.util.Util;
 
@@ -20,7 +21,7 @@ public class HolsDerGeierUtil extends HolsDerGeier {
      * @param p Player p
      */
     protected void activatePlayer(final Player p) {
-        p.fillArraylist(from, to);
+        p.fillArraylist(Main.getMain().from, Main.getMain().to);
         getActivePlayers().add(p);
     }
 
@@ -156,5 +157,16 @@ public class HolsDerGeierUtil extends HolsDerGeier {
     @Override
     public void onSetupFinished() {
         this.onSetupFinished();
+    }
+
+    public void setCardRange(final int from, final int to) throws IllegalMatchSetup {
+        if ((to-from+1)%3 != 0 || (to-from) < 0) {
+            throw new IllegalMatchSetup("Illegal Card range!");
+        }
+        Main.getMain().pointCardsFrom = from;
+        Main.getMain().pointCardsTo = to;
+
+        Main.getMain().from = -(Main.getMain().pointCardsTo/3);
+        Main.getMain().to = Main.getMain().pointCardsTo + Main.getMain().from;
     }
 }

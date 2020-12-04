@@ -27,6 +27,7 @@ public class Util {
 
     /**
      * Returns lowest value of an integer array
+     *
      * @param values ArrayList<Integer> values
      * @return int lowestValue
      */
@@ -40,6 +41,7 @@ public class Util {
 
     /**
      * Returns highest value of an integer array
+     *
      * @param values ArrayList<Integer> values
      * @return int highestValue
      */
@@ -53,9 +55,10 @@ public class Util {
 
     /**
      * This method is used to scale an image
+     *
      * @param srcImg to be scaled
-     * @param w width to be scaled to
-     * @param h height to be scaled to
+     * @param w      width to be scaled to
+     * @param h      height to be scaled to
      * @return Image width new scaling
      */
     public static Image getScaledImage(Image srcImg, int w, int h) {
@@ -71,6 +74,7 @@ public class Util {
 
     /**
      * This method is used to check if the copyright claim was checked
+     *
      * @return boolean hasReadCopyrightClaim
      */
     public static boolean hasReadCopyrightClaim() {
@@ -86,21 +90,20 @@ public class Util {
 
     /**
      * Simple bubbleSort Algorithm for ArrayList containing Integers
+     *
      * @param list ArrayList<Integer> list
      * @return ArrayList<Integer> list
      */
     public static ArrayList<Integer> bubbleSort(ArrayList<Integer> list) {
-
         int n = list.size();
         int temp = 0;
 
-        for (int i = 0; i < n-1; i++) {
+        for (int i = 0; i < n - 1; i++) {
             for (int j = 0; j < (n - i - 1); j++) {
-
-                if (list.get(j) > list.get(j+1)) {
+                if (list.get(j) > list.get(j + 1)) {
                     temp = list.get(j);
-                    list.set(j,list.get(j+1));
-                    list.set(j+1, temp);
+                    list.set(j, list.get(j + 1));
+                    list.set(j + 1, temp);
                 }
 
             }

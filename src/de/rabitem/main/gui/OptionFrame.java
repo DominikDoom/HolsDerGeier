@@ -1,9 +1,6 @@
 package de.rabitem.main.gui;
 
-import de.rabitem.main.HolsDerGeierUtil;
 import de.rabitem.main.Main;
-import de.rabitem.main.player.Player;
-import de.rabitem.main.player.PlayerManager;
 
 import javax.swing.*;
 import javax.swing.text.NumberFormatter;
@@ -14,35 +11,36 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class OptionFrame extends JPanel {
-    private JLabel lPlayer1 = null;
-    private JComboBox cbPlayer1 = null;
-    private JLabel lPlayer2 = null;
+    final private JLabel headline = new JLabel("<html><u>Options</u></html>");
+    private JLabel emptyLabel = new JLabel("");
     private JComboBox cbPlayer2 = null;
     private JLabel lRounds = null;
+    private JLabel lCardsFrom = null;
+    private JLabel lCardsTo = null;
     private JButton bAddPlayer = null;
-    private JFormattedTextField tfRounds = null;
+    private JButton bRemPlayer = null;
     private JButton bClose = null;
+    private JFormattedTextField tfRounds = null;
+    private JFormattedTextField tfCardsFrom = null;
+    private JFormattedTextField tfCardsTo = null;
+
+    private int startPlayerCount = 2;
+    private int additionalPlayerCount = 0;
 
     /**
      * Constructor of StatsFrame
      */
     public OptionFrame() {
-        this.setLayout(new GridBagLayout());
+        this.setLayout(null);
         this.setDoubleBuffered(true);
         this.setBorder(BorderFactory.createEtchedBorder());
 
-        lPlayer1 = new JLabel("Player 1:");
-        lPlayer2 = new JLabel("Player 2:");
-        cbPlayer1 = new JComboBox();
-        cbPlayer2 = new JComboBox();
-        bAddPlayer = new JButton("➕ Player");
-        lRounds = new JLabel("Rounds: ");
-        bClose = new JButton("Close");
-
-        for (String bot : Main.enabledPlayers) {
-            cbPlayer1.addItem(bot);
-            cbPlayer2.addItem(bot);
-        }
+        bAddPlayer = new JButton("<html><b><span style=\"color:green; font-size:12px\">+</span> Player</b></html>");
+        bRemPlayer = new JButton("<html><b><span style=\"color:red; font-size:12px\">⮌</span> Player</b></html>");
+        lRounds = new JLabel("<html><b>Rounds: </b></html>");
+        lCardsFrom = new JLabel("<html><b>Cards from: </b></html>");
+        lCardsTo = new JLabel("<html><b>to: </b></html>", SwingConstants.RIGHT);
+        bClose = new JButton("<html><b><span style=\"color:cyan; font-size:12px\">×</span> Close</b></html>");
 
         final NumberFormat format = NumberFormat.getInstance();
         final NumberFormatter formatter = new NumberFormatter(format);
@@ -53,9 +51,17 @@ public class OptionFrame extends JPanel {
         formatter.setCommitsOnValidEdit(true);
 
         tfRounds = new JFormattedTextField(formatter);
-        tfRounds.setPreferredSize(new Dimension(40, 40));
+        tfRounds.setPreferredSize(new Dimension(80, 40));
         tfRounds.setValue(1);
         tfRounds.setEditable(true);
+
+
+        tfCardsFrom = new JFormattedTextField(formatter);
+        tfCardsFrom.setValue(1);
+        tfCardsFrom.setEditable(true);
+        tfCardsTo = new JFormattedTextField(formatter);
+        tfCardsTo.setValue(15);
+        tfCardsTo.setEditable(true);
 
         bClose.addActionListener(new ActionListener() {
             @Override
@@ -67,22 +73,127 @@ public class OptionFrame extends JPanel {
         bAddPlayer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "Currently not working!", "Not implemented yet", JOptionPane.ERROR_MESSAGE);
+                if (additionalPlayerCount < 8) { // max. 10 Players
+                    additionalPlayerCount++;
+                    Main.getMain().getOptionsPanel().addComboBox(Main.getMain().getOptionsPanel().createComboBox(Main.enabledPlayers), "Player " + (additionalPlayerCount + startPlayerCount) + ":");
+                } else
+                    JOptionPane.showMessageDialog(null, "Too many players, a maximum of 10 Players is allowed!", "Error, too many players!", JOptionPane.ERROR_MESSAGE);
             }
         });
 
-        this.add(lPlayer1);
-        this.add(cbPlayer1);
-        this.add(lPlayer2);
-        this.add(cbPlayer2);
+        bRemPlayer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (additionalPlayerCount > 0) {
+                    additionalPlayerCount--;
+                    final OptionFrame optionPanel = Main.getMain().getOptionsPanel();
+                    optionPanel.remove(optionPanel.getComboBoxes().get(optionPanel.getComboBoxes().size() - 1));
+                    optionPanel.remove(optionPanel.getComponents()[optionPanel.getComponents().length - 1]);
+                    cbsInRow--;
+                    if (cbsInRow < 1 && additionalPlayerCount > 0) {
+                        y -= 70;
+                        cbsInRow = 2;
+                    }
+                    optionPanel.repaint();
+                }
+            }
+        });
+
+        bRemPlayer.setBounds(50, 200,
+                bRemPlayer.getPreferredSize().width + 25, bRemPlayer.getPreferredSize().height);
+        bRemPlayer.setUI(new StyledButtonUI());
+        bRemPlayer.setBackground(new Color(0x2dce98));
+        bRemPlayer.setForeground(Color.white);
+        this.add(bRemPlayer);
+
+        bAddPlayer.setBounds(50, 150,
+                bRemPlayer.getWidth(), bAddPlayer.getPreferredSize().height);
+        bAddPlayer.setUI(new StyledButtonUI());
+        bAddPlayer.setBackground(new Color(0x2dce98));
+        bAddPlayer.setForeground(Color.white);
         this.add(bAddPlayer);
+
+        lRounds.setBounds(175, bAddPlayer.getY(),
+                lRounds.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
         this.add(lRounds);
+
+        tfRounds.setBounds(20 + lRounds.getX() + lRounds.getWidth(), bAddPlayer.getY(),
+                tfRounds.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
         this.add(tfRounds);
+
+
+        lCardsFrom.setBounds(170 + tfRounds.getX(), bAddPlayer.getY(),
+                lCardsFrom.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
+        this.add(lCardsFrom);
+
+        tfCardsFrom.setBounds(20 + lCardsFrom.getX() + lCardsFrom.getWidth(), bAddPlayer.getY(),
+                tfCardsTo.getPreferredSize().width + 20, bAddPlayer.getPreferredSize().height);
+        this.add(tfCardsFrom);
+
+
+        lCardsTo.setBounds(170 + tfRounds.getX(), bRemPlayer.getY(),
+                lCardsFrom.getWidth(), bRemPlayer.getPreferredSize().height);
+        this.add(lCardsTo);
+
+        tfCardsTo.setBounds(20 + lCardsTo.getX() + lCardsTo.getWidth(), lCardsTo.getY(),
+                tfCardsTo.getPreferredSize().width + 20, bRemPlayer.getPreferredSize().height);
+        this.add(tfCardsTo);
+
+        bClose.setBounds(Main.getMain().framesWidth - (bClose.getPreferredSize().width + 25) - 35, Main.getMain().framesHeight - 60, bClose.getPreferredSize().width + 25, bClose.getPreferredSize().height);
+        bClose.setUI(new StyledButtonUI());
+        bClose.setBackground(new Color(0x2dce98));
+        bClose.setForeground(Color.white);
         this.add(bClose);
+
+        headline.setFont(new Font(headline.getFont().getFontName(), Font.BOLD, 40));
+        headline.setBounds(Main.getMain().framesWidth / 2 - headline.getPreferredSize().width / 2, 50, headline.getPreferredSize().width, headline.getPreferredSize().height);
+        this.add(headline);
+
+        final String[] labelTexts = {"Player 1:", "Player 2:"};
+        this.addComboBox(this.createComboBox(Main.enabledPlayers), labelTexts[0]);
+        this.addComboBox(this.createComboBox(Main.enabledPlayers), labelTexts[1]);
+    }
+
+    public JComboBox createComboBox(final ArrayList<String> fulfillment) {
+        final JComboBox comboBox = new JComboBox();
+        for (String bot : fulfillment) {
+            comboBox.addItem(bot);
+        }
+        return comboBox;
+    }
+
+    private int y = 250;
+    private int x = 0;
+    private int cbsInRow = 0;
+
+    public void addComboBox(final JComboBox comboBox, final String labelText) {
+        cbsInRow++;
+        if (cbsInRow > 2) {
+            cbsInRow = 1;
+            y += 70;
+        }
+        x = 55 + (cbsInRow - 1) * (250);
+
+        final JLabel jLabel = new JLabel("<html><b>" +
+                labelText +
+                "</b></html>");
+        jLabel.setBounds(x, y,
+                jLabel.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
+        this.add(jLabel);
+
+        comboBox.setBackground(new Color(0x2dce98));
+        comboBox.setForeground(Color.white);
+        // comboBox.setUI(new StyledComboBoxUI());
+        comboBox.setBounds(x + 15 + jLabel.getWidth(), y,
+                comboBox.getPreferredSize().width + 10, bAddPlayer.getPreferredSize().height);
+        this.add(comboBox);
+
+        this.repaint();
     }
 
     /**
      * Override this method to paint the background image
+     *
      * @param g Graphics g
      */
     @Override
@@ -98,15 +209,24 @@ public class OptionFrame extends JPanel {
 
     /**
      * Returns an ArrayList of JComboBoxes in the OptionsPanel
+     *
      * @return ArrayList<JComboBox>
      */
     public ArrayList<JComboBox> getComboBoxes() {
         ArrayList<JComboBox> comboBoxes = new ArrayList<>();
-        for (Component component : this.getComponents()){
+        for (Component component : this.getComponents()) {
             if (component instanceof JComboBox) {
                 comboBoxes.add((JComboBox) component);
             }
         }
         return comboBoxes;
+    }
+
+    public int getTfCardsFrom() {
+        return Integer.parseInt(tfCardsFrom.getValue().toString());
+    }
+
+    public int getTfCardsTo() {
+        return Integer.parseInt(tfCardsTo.getValue().toString());
     }
 }
