@@ -11,7 +11,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 
 public class OptionFrame extends JPanel {
-    final private JLabel headline = new JLabel("<html><u>Options</u></html>");
+    final private JLabel headline = new JLabel("<html><u style=\"color:white\">Options</u></html>");
     private JLabel emptyLabel = new JLabel("");
     private JComboBox cbPlayer2 = null;
     private JLabel lRounds = null;
@@ -35,12 +35,12 @@ public class OptionFrame extends JPanel {
         this.setDoubleBuffered(true);
         this.setBorder(BorderFactory.createEtchedBorder());
 
-        bAddPlayer = new JButton("<html><b><span style=\"color:green; font-size:12px\">+</span> Player</b></html>");
-        bRemPlayer = new JButton("<html><b><span style=\"color:red; font-size:12px\">⮌</span> Player</b></html>");
-        lRounds = new JLabel("<html><b>Rounds: </b></html>");
-        lCardsFrom = new JLabel("<html><b>Cards from: </b></html>");
-        lCardsTo = new JLabel("<html><b>to: </b></html>", SwingConstants.RIGHT);
-        bClose = new JButton("<html><b><span style=\"color:cyan; font-size:12px\">×</span> Close</b></html>");
+        bAddPlayer = new JButton("<html><b><span style=\"color:green; font-size:13px\">+</span> Player</b></html>");
+        bRemPlayer = new JButton("<html><b><span style=\"color:red; font-size:13px\">-</span> Player</b></html>");
+        lRounds = new JLabel("<html><b style=\"color:white; font-size:16px\">Rounds: </b></html>");
+        lCardsFrom = new JLabel("<html><b style=\"color:white; font-size:16px\">Cards from: </b></html>");
+        lCardsTo = new JLabel("<html><b style=\"color:white; font-size:16px\">to: </b></html>", SwingConstants.RIGHT);
+        bClose = new JButton("<html><b><span style=\"color:red; font-size:12px\">×</span> Close</b></html>");
 
         final NumberFormat format = NumberFormat.getInstance();
         final NumberFormatter formatter = new NumberFormatter(format);
@@ -117,7 +117,7 @@ public class OptionFrame extends JPanel {
                 lRounds.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
         this.add(lRounds);
 
-        tfRounds.setBounds(20 + lRounds.getX() + lRounds.getWidth(), bAddPlayer.getY(),
+        tfRounds.setBounds(10 + lRounds.getX() + lRounds.getWidth(), bAddPlayer.getY(),
                 tfRounds.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
         this.add(tfRounds);
 
@@ -126,7 +126,7 @@ public class OptionFrame extends JPanel {
                 lCardsFrom.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
         this.add(lCardsFrom);
 
-        tfCardsFrom.setBounds(20 + lCardsFrom.getX() + lCardsFrom.getWidth(), bAddPlayer.getY(),
+        tfCardsFrom.setBounds(10 + lCardsFrom.getX() + lCardsFrom.getWidth(), bAddPlayer.getY(),
                 tfCardsTo.getPreferredSize().width + 20, bAddPlayer.getPreferredSize().height);
         this.add(tfCardsFrom);
 
@@ -135,7 +135,7 @@ public class OptionFrame extends JPanel {
                 lCardsFrom.getWidth(), bRemPlayer.getPreferredSize().height);
         this.add(lCardsTo);
 
-        tfCardsTo.setBounds(20 + lCardsTo.getX() + lCardsTo.getWidth(), lCardsTo.getY(),
+        tfCardsTo.setBounds(10 + lCardsTo.getX() + lCardsTo.getWidth(), lCardsTo.getY(),
                 tfCardsTo.getPreferredSize().width + 20, bRemPlayer.getPreferredSize().height);
         this.add(tfCardsTo);
 
@@ -174,7 +174,7 @@ public class OptionFrame extends JPanel {
         }
         x = 55 + (cbsInRow - 1) * (250);
 
-        final JLabel jLabel = new JLabel("<html><b>" +
+        final JLabel jLabel = new JLabel("<html><b style=\"color:white; font-size:16px\">" +
                 labelText +
                 "</b></html>");
         jLabel.setBounds(x, y,

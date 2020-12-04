@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 
@@ -85,6 +86,7 @@ public class Main extends HolsDerGeier {
         } catch (URISyntaxException | NullPointerException e) {
             System.out.println(e.getMessage());
         }
+        enabledPlayers.sort(Comparator.reverseOrder());
 
         /**
          * Initialize utility methods
