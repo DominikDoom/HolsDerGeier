@@ -35,7 +35,7 @@ public class Util {
     public static int getLowestValue(final ArrayList<Integer> values) {
         int lowestValue = values.get(0);
         for (int i : values) {
-            lowestValue = i < lowestValue ? i : lowestValue;
+            lowestValue = Math.min(i, lowestValue);
         }
         return lowestValue;
     }
@@ -49,7 +49,7 @@ public class Util {
     public static int getHighestValue(final ArrayList<Integer> values) {
         int highestValue = values.get(0);
         for (int i : values) {
-            highestValue = i > highestValue ? i : highestValue;
+            highestValue = Math.max(i, highestValue);
         }
         return highestValue;
     }

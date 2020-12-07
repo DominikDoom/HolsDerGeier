@@ -21,7 +21,7 @@ public class HolsDerGeierUtil extends HolsDerGeier {
      * @param p Player p
      */
     protected void activatePlayer(final Player p) {
-        p.fillArraylist(Main.getMain().from, Main.getMain().to);
+        p.fillArraylist(Main.getMain().pointCardsFrom, Main.getMain().pointCardsTo);
         getActivePlayers().add(p);
     }
 
@@ -159,7 +159,7 @@ public class HolsDerGeierUtil extends HolsDerGeier {
 
     @Override
     public void onSetupFinished() {
-        this.onSetupFinished();
+
     }
 
     public void setCardRange(final int from, final int to) throws IllegalMatchSetup {

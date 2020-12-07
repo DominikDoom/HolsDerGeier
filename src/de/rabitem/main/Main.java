@@ -228,7 +228,7 @@ public class Main extends HolsDerGeier {
 
     @Override
     public void onSetupFinished() {
-        this.onSetupFinished();
+
     }
 
     /**

@@ -111,7 +111,7 @@ public abstract class HolsDerGeier implements OnSetupFinished {
     private void runGame() {
         finishedSetup = true;
         // fill cards
-        for (int i = Main.getMain().pointCardsFrom; i <= Main.getMain().pointCardsTo; i++) {
+        for (int i = Main.getMain().from; i <= Main.getMain().to; i++) {
             if (i == 0)
                 continue;
             pointCards.add(new PointsCard(i));
@@ -136,7 +136,7 @@ public abstract class HolsDerGeier implements OnSetupFinished {
 
         HashMap<Player, PlayerCard> usedCards = new HashMap<Player, PlayerCard>();
 
-        // System.out.println("We are about to play: " + rounds + " rounds with " + holsDerGeierUtil.getActivePlayersSize() + " Players!");
+        System.out.println("We are about to play: " + rounds + " rounds with " + holsDerGeierUtil.getActivePlayersSize() + " Players!");
         /**
          * Loop until there are no PointCards left
          */
