@@ -147,11 +147,11 @@ public abstract class HolsDerGeier implements OnSetupFinished {
              */
             currentPointCard = holsDerGeierUtil.getNextPointCard();
 
-            /* System.out.println("-----------------");
+            System.out.println("-----------------");
             if (currentPointCard.isMouseCard())
                 System.out.println("Who is going to win " + currentPointCard.getValue() + " Points?");
             else
-                System.out.println("Who is going to lose " + currentPointCard.getValue() * (-1) + " Points?"); */
+                System.out.println("Who is going to lose " + currentPointCard.getValue() * (-1) + " Points?");
 
             // HolsDerGeierUtil.getActivePlayers().forEach(System.out::println);
             // System.out.println();
