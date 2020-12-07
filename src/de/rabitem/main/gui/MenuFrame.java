@@ -63,7 +63,6 @@ public class MenuFrame extends JPanel {
         lHeadline.setFont(new Font("Verdana", Font.BOLD, 46));
         lHeadline.setForeground(Color.darkGray);
         lHeadline.setPreferredSize(new Dimension(370, 150));
-        lHeadline.setText("");
 
         // add components to the panel
         constraints.gridx = 0;
@@ -96,42 +95,15 @@ public class MenuFrame extends JPanel {
         constraints.anchor = GridBagConstraints.CENTER;
         this.add(lHeadline);
 
-        Timer timer = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String labelText = lHeadline.getText();
-                labelText += text.charAt(charIndex);
-                lHeadline.setText(labelText);
-                charIndex++;
-                if (charIndex >= text.length()) {
-                    ((Timer) e.getSource()).stop();
-                }
-            }
-        });
-        timer.start();
-
         // Action Listener
-        bClose.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //TODO: safe stats
-                System.exit(0);
-            }
+        bClose.addActionListener(e -> {
+            //TODO: safe stats
+            System.exit(0);
         });
 
-        bStartGame.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.getMain().getActionManager().bStartAction();
-            }
-        });
+        bStartGame.addActionListener(e -> Main.getMain().getActionManager().bStartAction());
 
-        bOptions.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Main.getMain().getActionManager().bOptionsAction();
-            }
-        });
+        bOptions.addActionListener(e -> Main.getMain().getActionManager().bOptionsAction());
     }
 
     /**

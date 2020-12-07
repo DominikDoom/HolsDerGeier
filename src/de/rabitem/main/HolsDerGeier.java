@@ -85,9 +85,8 @@ public abstract class HolsDerGeier implements OnSetupFinished {
          */
         if (ActionManagerUtil.getRoundsPlayed() == 1) {
             Main.activatePlayer();
+            HolsDerGeierUtil.getActivePlayers().forEach(Player::setOpponents);
         }
-        HolsDerGeierUtil.getActivePlayers().forEach(Player::setOpponents);
-
         /**
          * Error handling: check if setup is correct
          */
@@ -101,7 +100,7 @@ public abstract class HolsDerGeier implements OnSetupFinished {
                 throw new IllegalMatchSetup("The game was not set up correctly!");
         }
 
-        System.out.println("Match setup successful! Starting Game...");
+        // System.out.println("Match setup successful! Starting Game...");
         onSetupFinished.onSetupFinished();
         runGame();
     }
@@ -153,6 +152,9 @@ public abstract class HolsDerGeier implements OnSetupFinished {
                 System.out.println("Who is going to win " + currentPointCard.getValue() + " Points?");
             else
                 System.out.println("Who is going to lose " + currentPointCard.getValue() * (-1) + " Points?"); */
+
+            // HolsDerGeierUtil.getActivePlayers().forEach(System.out::println);
+            // System.out.println();
 
             for (Player p : HolsDerGeierUtil.getActivePlayers()) {
                 PlayerCard value = p.getNextCard(currentPointCard.getValue());
@@ -224,6 +226,7 @@ public abstract class HolsDerGeier implements OnSetupFinished {
         }
 
         // System.out.println("Game over!");
+        pointCards.clear();
 
         ArrayList<Integer> mostPointsPlayer = new ArrayList<>();
         for (Player player : HolsDerGeierUtil.getActivePlayers()) {
@@ -240,12 +243,12 @@ public abstract class HolsDerGeier implements OnSetupFinished {
             }
         }
 
-        winner.forEach(player -> {
+        /* winner.forEach(player -> {
             if (winner.size() == 1) // ansonsten Unentschieden :)
                 System.out.println("Winner: " + player.getName());
             else if (winner.size() > 1)
                 System.out.println("Draw");
-        });
+        }); */
 
         HashMap<Player, Integer> mapPlayers = new HashMap<>();
 

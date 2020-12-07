@@ -40,8 +40,9 @@ public class HolsDerGeierUtil extends HolsDerGeier {
      *
      * @return
      */
+    PointsCard retPointsCard = null;
     protected PointsCard getNextPointCard() {
-        PointsCard retPointsCard = pointCards.get(Util.random(0, pointCards.size() - 1));
+        retPointsCard = pointCards.get(Util.random(0, pointCards.size() - 1));
         pointCards.remove(retPointsCard);
         return retPointsCard;
     }
@@ -106,8 +107,9 @@ public class HolsDerGeierUtil extends HolsDerGeier {
      * This method is used to Map the Player places after each round
      * @param hashMap
      */
+    ArrayList<Integer> finalPoints = new ArrayList<>();
     public void mapPlayerPlaces(final HashMap<Player, Integer> hashMap) {
-        ArrayList<Integer> finalPoints = new ArrayList<>();
+
         hashMap.forEach((k, v) -> {
             finalPoints.add(v);
         });
@@ -123,6 +125,7 @@ public class HolsDerGeierUtil extends HolsDerGeier {
             });
             i.getAndIncrement();
         }
+        finalPoints.clear();
     }
 
     /**

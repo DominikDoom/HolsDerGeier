@@ -37,10 +37,10 @@ public class OptionFrame extends JPanel {
 
         bAddPlayer = new JButton("<html><b><span style=\"color:green; font-size:13px\">+</span> Player</b></html>");
         bRemPlayer = new JButton("<html><b><span style=\"color:red; font-size:13px\">-</span> Player</b></html>");
-        lRounds = new JLabel("<html><b style=\"color:white; font-size:16px\">Rounds: </b></html>");
-        lCardsFrom = new JLabel("<html><b style=\"color:white; font-size:16px\">Cards from: </b></html>");
-        lCardsTo = new JLabel("<html><b style=\"color:white; font-size:16px\">to: </b></html>", SwingConstants.RIGHT);
-        bClose = new JButton("<html><b><span style=\"color:red; font-size:12px\">×</span> Close</b></html>");
+        lRounds = new JLabel("<html><b style=\"color:white; font-size:13px\">Rounds: </b></html>");
+        lCardsFrom = new JLabel("<html><b style=\"color:white; font-size:13px\">Cards from:</b></html>");
+        lCardsTo = new JLabel("<html><b style=\"color:white; font-size:13px\">to:</b></html>", SwingConstants.RIGHT);
+        bClose = new JButton("<html><b><span style=\"color:red; font-size:13px\">×</span> Close</b></html>");
 
         final NumberFormat format = NumberFormat.getInstance();
         final NumberFormatter formatter = new NumberFormatter(format);
@@ -99,45 +99,44 @@ public class OptionFrame extends JPanel {
             }
         });
 
-        bRemPlayer.setBounds(50, 200,
+        bRemPlayer.setBounds(50, 300,
                 bRemPlayer.getPreferredSize().width + 25, bRemPlayer.getPreferredSize().height);
         bRemPlayer.setUI(new StyledButtonUI());
         bRemPlayer.setBackground(new Color(0x2dce98));
         bRemPlayer.setForeground(Color.white);
         this.add(bRemPlayer);
 
-        bAddPlayer.setBounds(50, 150,
+        bAddPlayer.setBounds(50, 250,
                 bRemPlayer.getWidth(), bAddPlayer.getPreferredSize().height);
         bAddPlayer.setUI(new StyledButtonUI());
         bAddPlayer.setBackground(new Color(0x2dce98));
         bAddPlayer.setForeground(Color.white);
         this.add(bAddPlayer);
 
-        lRounds.setBounds(175, bAddPlayer.getY(),
-                lRounds.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
-        this.add(lRounds);
-
-        tfRounds.setBounds(10 + lRounds.getX() + lRounds.getWidth(), bAddPlayer.getY(),
-                tfRounds.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
-        this.add(tfRounds);
-
-
-        lCardsFrom.setBounds(170 + tfRounds.getX(), bAddPlayer.getY(),
-                lCardsFrom.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
+        lCardsFrom.setBounds(175, 125,
+                lCardsFrom.getPreferredSize().width + 10, bAddPlayer.getPreferredSize().height);
         this.add(lCardsFrom);
 
-        tfCardsFrom.setBounds(10 + lCardsFrom.getX() + lCardsFrom.getWidth(), bAddPlayer.getY(),
+        tfCardsFrom.setBounds(10 + lCardsFrom.getX() + lCardsFrom.getWidth(), lCardsFrom.getY(),
                 tfCardsTo.getPreferredSize().width + 20, bAddPlayer.getPreferredSize().height);
         this.add(tfCardsFrom);
 
 
-        lCardsTo.setBounds(170 + tfRounds.getX(), bRemPlayer.getY(),
-                lCardsFrom.getWidth(), bRemPlayer.getPreferredSize().height);
+        lCardsTo.setBounds(75 + tfCardsFrom.getX(), lCardsFrom.getY(),
+                lCardsTo.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
         this.add(lCardsTo);
 
-        tfCardsTo.setBounds(10 + lCardsTo.getX() + lCardsTo.getWidth(), lCardsTo.getY(),
+        tfCardsTo.setBounds(10 + lCardsTo.getX() + lCardsTo.getWidth(), lCardsFrom.getY(),
                 tfCardsTo.getPreferredSize().width + 20, bRemPlayer.getPreferredSize().height);
         this.add(tfCardsTo);
+
+        lRounds.setBounds(140 + lCardsTo.getX(), lCardsFrom.getY(),
+                lRounds.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
+        this.add(lRounds);
+
+        tfRounds.setBounds(10 + lRounds.getX() + lRounds.getWidth(), lRounds.getY(),
+                tfRounds.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
+        this.add(tfRounds);
 
         bClose.setBounds(Main.getMain().framesWidth - (bClose.getPreferredSize().width + 25) - 35, Main.getMain().framesHeight - 60, bClose.getPreferredSize().width + 25, bClose.getPreferredSize().height);
         bClose.setUI(new StyledButtonUI());
@@ -172,22 +171,21 @@ public class OptionFrame extends JPanel {
             cbsInRow = 1;
             y += 70;
         }
-        x = 55 + (cbsInRow - 1) * (250);
+        x = lCardsFrom.getX() + (cbsInRow - 1) * (250);
 
-        final JLabel jLabel = new JLabel("<html><b style=\"color:white; font-size:16px\">" +
+        final JLabel jLabel = new JLabel("<html><b style=\"color:white; font-size:13px\">" +
                 labelText +
                 "</b></html>");
         jLabel.setBounds(x, y,
-                jLabel.getPreferredSize().width, bAddPlayer.getPreferredSize().height);
+                85, bAddPlayer.getPreferredSize().height);
         this.add(jLabel);
 
         comboBox.setBackground(new Color(0x2dce98));
         comboBox.setForeground(Color.white);
         // comboBox.setUI(new StyledComboBoxUI());
-        comboBox.setBounds(x + 15 + jLabel.getWidth(), y,
+        comboBox.setBounds(x + 5 + jLabel.getWidth(), y,
                 comboBox.getPreferredSize().width + 10, bAddPlayer.getPreferredSize().height);
         this.add(comboBox);
-
         this.repaint();
     }
 

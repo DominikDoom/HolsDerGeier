@@ -45,7 +45,6 @@ public class ActionManager {
                 if (Integer.parseInt(Main.getOptionsPanel().getTfRounds().getValue().toString()) > roundsPlayed[0]) {
                     roundsPlayed[0]++;
                     Main.getMain().reset();
-
                     Main.getGameThreadRunnable().run();
                 } else {
                     System.out.println("Rounds played: " + roundsPlayed[0]);

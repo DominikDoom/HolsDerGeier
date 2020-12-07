@@ -16,12 +16,12 @@ public abstract class Player {
     protected String name;
     protected PlayerCard lastMove = null;
     private int points = 0;
-    protected ArrayList<Player> oponnents = new ArrayList<>();
     protected int totalPoints = 0;
     private int winCounter = 0;
 
     private int placeLastRound = -1;
 
+    protected ArrayList<Player> oponnents = new ArrayList<>();
     /**
      * Constructor of Player
      *
@@ -214,9 +214,8 @@ public abstract class Player {
      * Method to set a opponent
      */
     public final void setOpponents() {
-        ArrayList<Player> players = HolsDerGeierUtil.getActivePlayers();
-        players.remove(this.name);
-        oponnents = players;
+        oponnents.addAll(HolsDerGeierUtil.getActivePlayers());
+        oponnents.remove(this);
     }
 
     /**
