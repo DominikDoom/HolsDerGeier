@@ -102,11 +102,18 @@ public abstract class Player {
     /**
      * Resets the Player
      */
-    public void reset() {
+    public final void reset() {
         cards.clear();
         lastMove = null;
         this.fillArraylist(Main.getHolsDerGeierUtil().fromCards(), Main.getHolsDerGeierUtil().toCards());
         this.placeLastRound = -1;
+    }
+
+    /**
+     * Overridable method for resets after each round
+     */
+    public void customResets() {
+
     }
 
     /**

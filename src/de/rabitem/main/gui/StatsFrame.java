@@ -6,6 +6,8 @@ import de.rabitem.main.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,32 +23,41 @@ public class StatsFrame extends JPanel {
     public StatsFrame() {
         this.setDoubleBuffered(true);
         this.setBorder(BorderFactory.createEtchedBorder());
+        this.setLayout(null);
         if (this.calledInit)
             return;
-        this.initComponents();
         this.calledInit = true;
     }
 
     /**
      * Init Components,called after starting game!
      */
-    private void initComponents() {
+    public void initComponents() {
         // wait for first game finish
-        while(!Main.getGameThreadRunnable().isFirstGameRun()){
+        //TODO: fix
+        /* JButton bClose = new JButton("Close");
+        bClose.setPreferredSize(new Dimension(140, 40));
+        bClose.setBounds(900 / 2 - bClose.getPreferredSize().width / 2, 500, bClose.getPreferredSize().width,
+                bClose.getPreferredSize().height);
+        this.add(bClose);
+
+        bClose.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.getMain().getActionManager().getStatsPanel().setVisible(false);
+                Main.getOptionsPanel().setVisible(true);
+            }
+        }); */
+
+        while (!Main.getGameThreadRunnable().isFirstGameRun()) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-
         for (int i = 0; i < HolsDerGeierUtil.getActivePlayers().size(); i++) {
-            final JProgressBar progressBar = new JProgressBar(0, 100);
-            progressBar.setString(HolsDerGeierUtil.getActivePlayers().get(i).getName());
-            progressBar.setValue(0);
-            progressBar.setStringPainted(true);
-            progressBar.setOpaque(true);
-            this.add(progressBar);
+            this.addBar(new JProgressBar(0, 100), HolsDerGeierUtil.getActivePlayers().get(i).getName());
         }
 
         final Component[] components = this.getComponents();
@@ -88,7 +99,27 @@ public class StatsFrame extends JPanel {
                     return;
                 }
             }
-        }, 50, 50);
+        }, 500, 500);
+    }
+
+    private int cbsInRow = 0;
+    private int y = 100;
+    private int x = 0;
+
+    public void addBar(final JProgressBar progressBar, final String text) {
+        cbsInRow++;
+        if (cbsInRow > 2) {
+            cbsInRow = 1;
+            y += 70;
+        }
+        x = cbsInRow * 250;
+
+        progressBar.setString(text);
+        progressBar.setValue(0);
+        progressBar.setStringPainted(true);
+        progressBar.setOpaque(true);
+        progressBar.setBounds(x, y, progressBar.getPreferredSize().width, progressBar.getPreferredSize().height);
+        this.add(progressBar);
     }
 
     /**

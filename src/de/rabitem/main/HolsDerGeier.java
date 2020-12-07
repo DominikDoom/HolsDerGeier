@@ -69,6 +69,7 @@ public abstract class HolsDerGeier implements OnSetupFinished {
          */
         for (Player p : HolsDerGeierUtil.getActivePlayers()) {
             p.reset();
+            p.customResets();
         }
         /**
          * Clear PointCards List

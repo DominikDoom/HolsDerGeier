@@ -20,9 +20,9 @@ public class ActionManager {
             return;
         }
         Main.getMainMenuFrame().setVisible(false);
-        Main.getGameThread().start();
         Main.getMain().getActionManager().initStatsFrame();
-
+        Main.getGameThread().start();
+        statsPanel.initComponents();
     }
 
     public void initStatsFrame(){
@@ -53,6 +53,5 @@ public class ActionManager {
 
     public void setCancelTask(boolean b) {
         statsPanel.setCancelTask(b);
-
     }
 }
