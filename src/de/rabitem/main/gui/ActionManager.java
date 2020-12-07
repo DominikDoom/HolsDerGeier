@@ -1,5 +1,6 @@
 package de.rabitem.main.gui;
 
+import de.rabitem.main.HolsDerGeierUtil;
 import de.rabitem.main.Main;
 import de.rabitem.main.exception.IllegalMatchSetup;
 
@@ -20,13 +21,14 @@ public class ActionManager {
         }
         Main.getMainMenuFrame().setVisible(false);
         Main.getGameThread().start();
+        Main.getMain().getActionManager().initStatsFrame();
+
     }
 
     public void initStatsFrame(){
         if (statsFrame != null && statsFrame.isVisible())
             return;
         statsPanel = new StatsFrame();
-        statsPanel.setCancelTask(true);
         statsFrame = Main.getMain().setupFrame(statsPanel, "/resources/iconFrames.png");
         statsFrame.setVisible(true);
     }
@@ -47,5 +49,10 @@ public class ActionManager {
 
     public JFrame getStatsFrame() {
         return statsFrame;
+    }
+
+    public void setCancelTask(boolean b) {
+        statsPanel.setCancelTask(b);
+
     }
 }

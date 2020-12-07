@@ -31,6 +31,15 @@ public class StatsFrame extends JPanel {
      * Init Components,called after starting game!
      */
     private void initComponents() {
+        // wait for first game finish
+        while(!Main.getGameThreadRunnable().isFirstGameRun()){
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
         for (int i = 0; i < HolsDerGeierUtil.getActivePlayers().size(); i++) {
             final JProgressBar progressBar = new JProgressBar(0, 100);
             progressBar.setString(HolsDerGeierUtil.getActivePlayers().get(i).getName());
@@ -78,10 +87,8 @@ public class StatsFrame extends JPanel {
                     this.cancel();
                     return;
                 }
-                this.cancel();
-                return;
             }
-        }, 1000, 1000);
+        }, 50, 50);
     }
 
     /**

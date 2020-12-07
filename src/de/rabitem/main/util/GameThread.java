@@ -10,6 +10,7 @@ import de.rabitem.main.player.Player;
 import java.util.HashMap;
 
 public class GameThread implements Runnable {
+    private boolean firstGameRun = false;
     @Override
     public void run() {
         try {
@@ -17,10 +18,11 @@ public class GameThread implements Runnable {
                 Main.getMain().startGame();
                 Main.getMain().reset();
                 ActionManagerUtil.addRoundsPlayed();
+                if (i < 1)
+                    firstGameRun = true;
             }
             this.endMapping();
-            Main.getMain().getActionManager().initStatsFrame();
-
+            Main.getMain().getActionManager().setCancelTask(true);
         } catch (IllegalMatchSetup | IllegalPlayerSize e) {
             System.out.println(e.getMessage());
         }
@@ -31,10 +33,13 @@ public class GameThread implements Runnable {
         HashMap<Player, Integer> mapPlayers = new HashMap<>();
         for (Player p : Main.getPlayerManager().getPlayerList()) {
             mapPlayers.put(p, p.getTotalPoints());
-            System.out.println(p.getWinCounter());
         }
 
         Main.getHolsDerGeierUtil().mapPlayerPlaces(mapPlayers, true);
         Main.getMain().setStatsManager(new StatsManager(HolsDerGeierUtil.getActivePlayers()));
+    }
+
+    public boolean isFirstGameRun() {
+        return firstGameRun;
     }
 }

@@ -24,8 +24,8 @@ public class OptionFrame extends JPanel {
     private JFormattedTextField tfCardsFrom = null;
     private JFormattedTextField tfCardsTo = null;
 
-    private int startPlayerCount = 2;
-    private int additionalPlayerCount = 0;
+    public int startPlayerCount = 2;
+    public int additionalPlayerCount = 0;
 
     /**
      * Constructor of StatsFrame
