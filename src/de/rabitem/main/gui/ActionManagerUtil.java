@@ -7,4 +7,8 @@ public class ActionManagerUtil {
     public static int getRoundsPlayed() {
         return Main.getMain().actionManager.roundsPlayed[0];
     }
+
+    public static int addRoundsPlayed(){
+        return Main.getMain().actionManager.roundsPlayed[0]++;
+    }
 }
