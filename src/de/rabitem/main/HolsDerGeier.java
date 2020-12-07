@@ -83,7 +83,7 @@ public abstract class HolsDerGeier implements OnSetupFinished {
         /**
          * Setup player
          */
-        if (ActionManagerUtil.getRoundsPlayed() == 1) {
+        if (ActionManagerUtil.getRoundsPlayed() == 0) {
             Main.activatePlayer();
             HolsDerGeierUtil.getActivePlayers().forEach(Player::setOpponents);
         }
@@ -101,7 +101,6 @@ public abstract class HolsDerGeier implements OnSetupFinished {
         }
 
         // System.out.println("Match setup successful! Starting Game...");
-        onSetupFinished.onSetupFinished();
         runGame();
     }
 
@@ -111,7 +110,7 @@ public abstract class HolsDerGeier implements OnSetupFinished {
     private void runGame() {
         finishedSetup = true;
         // fill cards
-        for (int i = Main.getMain().from; i <= Main.getMain().to; i++) {
+        for (int i = Main.getMain().pointCardsFrom; i <= Main.getMain().pointCardsTo; i++) {
             if (i == 0)
                 continue;
             pointCards.add(new PointsCard(i));

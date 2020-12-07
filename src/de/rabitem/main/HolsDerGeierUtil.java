@@ -21,7 +21,7 @@ public class HolsDerGeierUtil extends HolsDerGeier {
      * @param p Player p
      */
     protected void activatePlayer(final Player p) {
-        p.fillArraylist(Main.getMain().pointCardsFrom, Main.getMain().pointCardsTo);
+        p.fillArraylist(Main.getMain().from, Main.getMain().to);
         getActivePlayers().add(p);
     }
 
@@ -166,10 +166,10 @@ public class HolsDerGeierUtil extends HolsDerGeier {
         if ((to-from+1)%3 != 0 || (to-from) < 0) {
             throw new IllegalMatchSetup("Illegal Card range!");
         }
-        Main.getMain().pointCardsFrom = from;
-        Main.getMain().pointCardsTo = to;
+        Main.getMain().from = from;
+        Main.getMain().to = to;
 
-        Main.getMain().from = -(Main.getMain().pointCardsTo/3);
-        Main.getMain().to = Main.getMain().pointCardsTo + Main.getMain().from;
+        Main.getMain().pointCardsFrom = -(Main.getMain().to/3);
+        Main.getMain().pointCardsTo = Main.getMain().to + Main.getMain().pointCardsFrom;
     }
 }
