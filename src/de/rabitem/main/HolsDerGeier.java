@@ -21,11 +21,11 @@ public abstract class HolsDerGeier implements OnSetupFinished {
 
     protected boolean finishedSetup;
 
-    protected int from = -5;
-    protected int to = 10;
+    protected int from = 1;
+    protected int to = 15;
 
-    protected int pointCardsFrom = 1;
-    protected int pointCardsTo = 15;
+    protected int pointCardsFrom = -5;
+    protected int pointCardsTo = 10;
 
     protected Player winningPlayer = null;
 

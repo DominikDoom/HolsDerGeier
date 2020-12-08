@@ -5,8 +5,6 @@ import de.rabitem.main.gui.GUIUtil;
 import de.rabitem.main.gui.MenuFrame;
 import de.rabitem.main.gui.OptionFrame;
 import de.rabitem.main.player.PlayerManager;
-import de.rabitem.main.player.instances.LocalPlayer;
-import de.rabitem.main.player.instances.RandomPlayer;
 import de.rabitem.main.util.GameThread;
 import de.rabitem.main.util.StatsManager;
 import de.rabitem.main.util.Util;
@@ -15,6 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -106,21 +105,19 @@ public class Main extends HolsDerGeier {
     }
 
     /**
-     * Here you can activate your player...
+     * Automatically activates all players that are selected in the options
      */
-
     public static void activatePlayer() {
-        /* holsDerGeierUtil.activatePlayer(new RandomPlayer("Player1"));
-        holsDerGeierUtil.activatePlayer(new RandomPlayer("Player2"));
-        holsDerGeierUtil.activatePlayer(new LocalPlayer("Player3"));
-        holsDerGeierUtil.activatePlayer(new RandomPlayer("Player4")); */
         int count = 1;
-        for (JComboBox comboBox : Main.getOptionsPanel().getComboBoxes()) {
-            // TODO: classloader, make this progress less stressful
-            if (comboBox.getSelectedItem().toString().equalsIgnoreCase(enabledPlayers.get(0))) {
-                holsDerGeierUtil.activatePlayer(new RandomPlayer("Player " + count));
-            } else if (comboBox.getSelectedItem().toString().equalsIgnoreCase(enabledPlayers.get(1))) {
-                holsDerGeierUtil.activatePlayer(new LocalPlayer("Player " + count));
+        for (JComboBox<String> comboBox : Main.getOptionsPanel().getComboBoxes()) {
+            Object item = comboBox.getSelectedItem();
+            if (item != null && enabledPlayers.contains(item.toString())) {
+                try {
+                    holsDerGeierUtil.activatePlayer(holsDerGeierUtil.getPlayerInstance(item.toString(), "Player " + count));
+                } catch (ClassNotFoundException | NoSuchMethodException | IllegalAccessException | InvocationTargetException | InstantiationException e) {
+                    System.out.println("Failed to create a new instance of " + item.toString() + ":");
+                    e.printStackTrace();
+                }
             }
             count++;
         }

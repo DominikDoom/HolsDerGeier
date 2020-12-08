@@ -153,8 +153,8 @@ public class OptionFrame extends JPanel {
         this.addComboBox(this.createComboBox(Main.enabledPlayers), labelTexts[1]);
     }
 
-    public JComboBox createComboBox(final ArrayList<String> fulfillment) {
-        final JComboBox comboBox = new JComboBox();
+    public JComboBox<String> createComboBox(final ArrayList<String> fulfillment) {
+        final JComboBox<String> comboBox = new JComboBox<>();
         for (String bot : fulfillment) {
             comboBox.addItem(bot);
         }
@@ -165,7 +165,7 @@ public class OptionFrame extends JPanel {
     private int x = 0;
     private int cbsInRow = 0;
 
-    public void addComboBox(final JComboBox comboBox, final String labelText) {
+    public void addComboBox(final JComboBox<String> comboBox, final String labelText) {
         cbsInRow++;
         if (cbsInRow > 2) {
             cbsInRow = 1;
@@ -210,11 +210,11 @@ public class OptionFrame extends JPanel {
      *
      * @return ArrayList<JComboBox>
      */
-    public ArrayList<JComboBox> getComboBoxes() {
-        ArrayList<JComboBox> comboBoxes = new ArrayList<>();
+    public ArrayList<JComboBox<String>> getComboBoxes() {
+        ArrayList<JComboBox<String>> comboBoxes = new ArrayList<>();
         for (Component component : this.getComponents()) {
             if (component instanceof JComboBox) {
-                comboBoxes.add((JComboBox) component);
+                comboBoxes.add((JComboBox<String>) component);
             }
         }
         return comboBoxes;

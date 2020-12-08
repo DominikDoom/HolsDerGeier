@@ -5,6 +5,7 @@ import de.rabitem.main.exception.IllegalMatchSetup;
 import de.rabitem.main.player.Player;
 import de.rabitem.main.util.Util;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +24,18 @@ public class HolsDerGeierUtil extends HolsDerGeier {
     protected void activatePlayer(final Player p) {
         p.fillArraylist(Main.getMain().from, Main.getMain().to);
         getActivePlayers().add(p);
+    }
+
+    /**
+     * Creates and returns a new player instance based on name
+     * @param classname The classname of the player instance, without leading package identifier.
+     * @param name The name the new player instance should have.
+     * @return A new instance of the subclass specified in <i>classname</i>, extending {@link Player Player}
+     * */
+    protected Player getPlayerInstance(String classname, String name) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Class<?> clazz = Class.forName("de.rabitem.main.player.instances." + classname);
+        Class<? extends Player> newClass = clazz.asSubclass(Player.class);
+        return newClass.getDeclaredConstructor(new Class[]{String.class}).newInstance(name);
     }
 
     /**
