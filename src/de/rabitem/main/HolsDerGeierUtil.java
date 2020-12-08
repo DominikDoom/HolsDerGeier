@@ -94,7 +94,7 @@ public class HolsDerGeierUtil extends HolsDerGeier {
      * @return int fromCards
      */
     public int fromCards() {
-        return this.from;
+        return Main.getMain().from;
     }
 
     /**
@@ -103,7 +103,7 @@ public class HolsDerGeierUtil extends HolsDerGeier {
      * @return int toCards
      */
     public int toCards() {
-        return this.to;
+        return Main.getMain().to;
     }
 
     /**
