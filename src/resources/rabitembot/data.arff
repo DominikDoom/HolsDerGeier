@@ -1,0 +1,53 @@
+@relation HolsDerGeier
+
+@attribute pointCard numeric
+@attribute youCard numeric
+@attribute enemyCard numeric
+@attribute win {TRUE, FALSE}
+
+@data
+1, 1, 15, FALSE
+2, 2, 14, FALSE
+3, 3, 13, FALSE
+4, 4, 12, FALSE
+5, 5, 11, FALSE
+6, 6, 10, FALSE
+7, 7, 9, FALSE
+8, 8, 8, FALSE
+9, 9, 7, TRUE
+10, 10, 6, TRUE
+-1, 11, 5, FALSE
+-2, 12, 4, FALSE
+-3, 13, 3, FALSE
+-4, 14, 2, FALSE
+-5, 15, 1, FALSE
+-5, 1, 15, TRUE
+-4, 2, 14, TRUE
+-3, 3, 13, TRUE
+-2, 4, 12, TRUE
+-1, 5, 11, TRUE
+1, 6, 10, TRUE
+2, 7, 9, TRUE
+3, 8, 8, TRUE
+4, 9, 7, FALSE
+5, 10, 6, FALSE
+6, 11, 5, TRUE
+7, 12, 4, TRUE
+8, 13, 3, TRUE
+9, 14, 2, TRUE
+10, 15, 1, TRUE
+10,11,14, FALSE
+6,3,4, FALSE
+5,2,5, FALSE
+-3,10,7, FALSE
+4,4,3, TRUE
+1,6,13, FALSE
+9,15,12, TRUE
+8,14,2, TRUE
+-5,7,6, FALSE
+2,13,8, TRUE
+-1,1,1, FALSE
+-2,9,9, FALSE
+-7,8,11, TRUE
+7,5,10, FALSE
+3,12,15, FALSE

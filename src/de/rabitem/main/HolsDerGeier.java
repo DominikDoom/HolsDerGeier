@@ -215,6 +215,8 @@ public abstract class HolsDerGeier implements OnSetupFinished {
             }
             // activePlayer.forEach(k1 -> System.out.println(k1.getName() + " : " + k1.getPoints()));
             // System.out.println();
+            System.out.println(currentPointCard.getValue()+","+activePlayer.get(0).getLastMove().getValue() +","+
+                    activePlayer.get(1).getLastMove().getValue()+",");
 
             /**
              * Diese Sektion ggf. auslagern!
